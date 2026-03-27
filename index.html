@@ -1,0 +1,1980 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>CVhelper.ai — Full Course Platform</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=Cabinet+Grotesk:wght@400;500;700;800;900&family=Satoshi:wght@300;400;500;700&display=swap" rel="stylesheet"/>
+<style>
+:root{
+  --bg:#020209;--bg2:#07071A;--sfc:#0C0C25;--sfc2:#10102E;
+  --border:rgba(110,86,255,.14);--border2:rgba(110,86,255,.30);
+  --fg:#EDF0FF;--muted:#4A5168;--soft:#7E8BA8;
+  --acc:#6E56FF;--acc2:#A78BFA;--acc-g:rgba(110,86,255,.28);
+  --cyan:#22D3EE;--green:#34D399;--amber:#FBBF24;--red:#F87171;
+  --r:14px;
+}
+*,::before,::after{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{font-family:"Satoshi",sans-serif;background:var(--bg);color:var(--fg);min-height:100vh;overflow-x:hidden}
+input,select,button,textarea{font-family:inherit}
+::-webkit-scrollbar{width:4px}
+::-webkit-scrollbar-thumb{background:rgba(110,86,255,.25);border-radius:99px}
+
+/* Aurora */
+.aurora{position:fixed;inset:0;pointer-events:none;z-index:0;overflow:hidden}
+.ab{position:absolute;border-radius:50%;filter:blur(150px)}
+.a1{width:900px;height:800px;top:-25%;left:-15%;background:rgba(110,86,255,.08);animation:fl1 22s ease-in-out infinite}
+.a2{width:700px;height:600px;bottom:-10%;right:-10%;background:rgba(34,211,238,.05);animation:fl2 26s ease-in-out infinite}
+@keyframes fl1{0%,100%{transform:translate(0,0)}50%{transform:translate(70px,-55px) scale(1.06)}}
+@keyframes fl2{0%,100%{transform:translate(0,0)}50%{transform:translate(-60px,70px) scale(1.08)}}
+body::after{content:"";position:fixed;inset:0;pointer-events:none;z-index:9999;opacity:.018;
+  background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='4'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)'/%3E%3C/svg%3E")}
+
+/* NAV */
+.nav{position:sticky;top:0;z-index:100;height:62px;display:flex;align-items:center;padding:0 2rem;gap:1.5rem;
+  background:rgba(2,2,9,.85);backdrop-filter:blur(22px);border-bottom:1px solid var(--border)}
+.logo{display:flex;align-items:center;gap:.6rem;text-decoration:none;cursor:pointer}
+.logo-icon{width:36px;height:36px;border-radius:10px;background:linear-gradient(135deg,var(--acc),#9B74FF);
+  display:grid;place-items:center;font-family:"Cabinet Grotesk",sans-serif;font-weight:900;font-size:11px;color:#fff;
+  box-shadow:0 0 28px var(--acc-g)}
+.logo-name{font-family:"Cabinet Grotesk",sans-serif;font-weight:900;font-size:1.15rem;letter-spacing:-.03em;color:var(--fg)}
+.logo-name span{color:var(--acc2)}
+.nav-links{display:flex;gap:.1rem;list-style:none}
+.nav-links a{padding:.36rem .85rem;border-radius:8px;font-size:.82rem;font-weight:500;color:var(--muted);text-decoration:none;transition:.2s;cursor:pointer}
+.nav-links a:hover,.nav-links a.on{color:var(--fg);background:rgba(255,255,255,.055)}
+.nav-links a.on{color:var(--acc2)}
+.nav-r{margin-left:auto;display:flex;align-items:center;gap:.65rem}
+.btn{padding:.4rem 1rem;border-radius:8px;font-size:.82rem;font-weight:600;cursor:pointer;border:none;transition:.2s all}
+.btn-o{background:transparent;color:var(--soft);border:1px solid var(--border)}
+.btn-o:hover{border-color:rgba(110,86,255,.4);color:var(--fg)}
+.btn-acc{background:linear-gradient(135deg,var(--acc),#9B74FF);color:#fff;box-shadow:0 4px 16px var(--acc-g)}
+.btn-acc:hover{transform:translateY(-1px);box-shadow:0 8px 26px var(--acc-g)}
+.btn-acc:disabled{opacity:.5;cursor:not-allowed;transform:none}
+
+/* PAGES */
+.page{display:none;position:relative;z-index:1}
+.page.active{display:block}
+
+/*  HOME PAGE  */
+.hero{max-width:1200px;margin:0 auto;padding:5.5rem 2rem 3rem;text-align:center}
+.hero-pill{display:inline-flex;align-items:center;gap:.45rem;padding:.32rem .95rem;margin-bottom:1.75rem;
+  background:rgba(110,86,255,.1);border:1px solid rgba(110,86,255,.28);border-radius:99px;
+  font-size:.75rem;font-weight:700;color:var(--acc2);letter-spacing:.04em}
+.pill-dot{width:7px;height:7px;border-radius:50%;background:var(--acc2);animation:blink 2s infinite}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:.3}}
+@keyframes bar1{0%,100%{height:20px}50%{height:35px}}
+@keyframes bar2{0%,100%{height:30px}50%{height:12px}}
+
+h1{font-family:"Cabinet Grotesk",sans-serif;font-size:clamp(2.6rem,6.5vw,5rem);
+  font-weight:900;line-height:1.06;letter-spacing:-.04em;margin-bottom:1.25rem}
+.grad{background:linear-gradient(90deg,var(--acc2) 0%,var(--cyan) 50%,#F472B6 100%);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+  background-size:200%;animation:sh 5s linear infinite}
+@keyframes sh{0%{background-position:0%}100%{background-position:200%}}
+.hero-desc{font-size:1.05rem;color:var(--soft);max-width:560px;margin:0 auto 2.25rem;line-height:1.74;font-weight:300}
+
+/* Search */
+.search-wrap{max-width:720px;margin:0 auto 1.2rem}
+.search-bar{display:flex;align-items:center;gap:.55rem;background:rgba(12,12,37,.85);border:1.5px solid rgba(110,86,255,.28);
+  border-radius:16px;padding:.72rem .9rem .72rem 1.1rem;
+  box-shadow:0 0 0 1px rgba(110,86,255,.06),0 24px 50px rgba(0,0,0,.55);transition:.25s;backdrop-filter:blur(12px)}
+.search-bar:focus-within{border-color:var(--acc);box-shadow:0 0 0 4px rgba(110,86,255,.14)}
+.s-ico{color:var(--muted);flex-shrink:0;width:18px;height:18px}
+.search-bar input{
+  flex:1;border:none;outline:none;
+  color:var(--fg);font-size:1rem;
+  background:transparent !important;
+  -webkit-box-shadow:0 0 0 1000px transparent inset !important;
+  -webkit-text-fill-color:var(--fg) !important;
+  caret-color:var(--acc2);
+}
+.search-bar input::placeholder{color:var(--muted)}
+.search-bar input:-webkit-autofill,
+.search-bar input:-webkit-autofill:hover,
+.search-bar input:-webkit-autofill:focus{
+  -webkit-box-shadow:0 0 0 1000px #0C0C25 inset !important;
+  -webkit-text-fill-color:var(--fg) !important;
+  caret-color:var(--acc2);
+}
+.s-level,.s-dur{
+  background:#0C0C25;
+  border:1px solid rgba(110,86,255,.2);
+  color:var(--soft);
+  border-radius:8px;padding:.38rem .55rem;font-size:.78rem;outline:none;cursor:pointer;
+  -webkit-appearance:none;appearance:none;
+}
+.s-level:focus,.s-dur:focus{border-color:var(--acc)}
+.s-level option,.s-dur option{background:#07071A;color:var(--fg)}
+.btn-gen{padding:.52rem 1.4rem;border-radius:10px;background:linear-gradient(135deg,var(--acc),#9B74FF);
+  color:#fff;border:none;cursor:pointer;font-size:.88rem;font-weight:700;transition:.2s;
+  box-shadow:0 4px 16px var(--acc-g);white-space:nowrap}
+.btn-gen:hover{transform:translateY(-1px);box-shadow:0 8px 26px var(--acc-g)}
+.btn-gen:disabled{opacity:.5;cursor:not-allowed;transform:none}
+
+.quick-sug{display:flex;gap:.42rem;flex-wrap:wrap;justify-content:center;max-width:680px;margin:0 auto 2.5rem}
+.qs{padding:.28rem .82rem;border-radius:99px;font-size:.75rem;font-weight:500;cursor:pointer;
+  background:rgba(255,255,255,.04);border:1px solid var(--border);color:var(--soft);transition:.2s}
+.qs:hover{background:rgba(110,86,255,.12);border-color:rgba(110,86,255,.3);color:var(--acc2)}
+
+.h-stats{display:flex;gap:3rem;justify-content:center;margin-top:3rem;padding-top:2.5rem;border-top:1px solid var(--border);flex-wrap:wrap}
+.hs-v{font-family:"Cabinet Grotesk",sans-serif;font-size:1.9rem;font-weight:900;
+  background:linear-gradient(135deg,var(--acc2),var(--cyan));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.hs-l{font-size:.71rem;color:var(--muted);margin-top:.15rem;letter-spacing:.03em}
+
+/* Courses grid on home */
+.sec{position:relative;z-index:1;max-width:1200px;margin:0 auto;padding:0 2rem 3rem}
+.sec-hdr{display:flex;align-items:center;justify-content:space-between;margin-bottom:1.3rem;flex-wrap:wrap;gap:.6rem}
+.sec-hdr h2{font-family:"Cabinet Grotesk",sans-serif;font-size:1.25rem;font-weight:800;letter-spacing:-.025em}
+.cg{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:1.1rem}
+.cc{background:var(--sfc);border:1px solid var(--border);border-radius:18px;overflow:hidden;cursor:pointer;transition:.3s all}
+.cc:hover{border-color:var(--border2);transform:translateY(-4px);box-shadow:0 28px 65px rgba(0,0,0,.5)}
+.cc-thumb{height:160px;position:relative;display:flex;align-items:center;justify-content:center}
+.cc-emo{font-size:3.5rem;position:relative;z-index:1;transition:.3s;filter:drop-shadow(0 4px 18px rgba(0,0,0,.55))}
+.cc:hover .cc-emo{transform:scale(1.1) translateY(-4px)}
+.cc-shine{position:absolute;inset:0;opacity:0;transition:.3s;background:radial-gradient(ellipse at 50% 100%,rgba(110,86,255,.25),transparent 65%)}
+.cc:hover .cc-shine{opacity:1}
+.cc-cat{position:absolute;top:.7rem;left:.7rem;z-index:2;padding:.2rem .65rem;border-radius:99px;font-size:.64rem;font-weight:700;backdrop-filter:blur(10px)}
+.cc-lvl{position:absolute;top:.7rem;right:.7rem;z-index:2;padding:.2rem .65rem;border-radius:99px;font-size:.64rem;background:rgba(0,0,0,.45);color:var(--soft);backdrop-filter:blur(8px)}
+.ai-tag{position:absolute;bottom:.65rem;right:.65rem;z-index:2;padding:.18rem .58rem;border-radius:99px;font-size:.6rem;font-weight:700;background:rgba(110,86,255,.22);border:1px solid rgba(110,86,255,.4);color:var(--acc2);backdrop-filter:blur(8px)}
+.cc-body{padding:1.1rem 1.2rem}
+.cc-body h3{font-family:"Cabinet Grotesk",sans-serif;font-size:.94rem;font-weight:800;margin-bottom:.35rem;line-height:1.32;letter-spacing:-.015em}
+.cc-body p{font-size:.78rem;color:var(--soft);line-height:1.6;margin-bottom:.85rem;font-weight:300}
+.cc-meta{display:flex;gap:.7rem;margin-bottom:.85rem;flex-wrap:wrap}
+.cc-meta span{display:flex;align-items:center;gap:.22rem;font-size:.7rem;color:var(--muted)}
+.cc-foot{display:flex;align-items:center;justify-content:space-between;padding-top:.85rem;border-top:1px solid var(--border)}
+.cc-info{font-size:.73rem;color:var(--muted)}
+.btn-view{padding:.35rem .9rem;border-radius:8px;font-size:.73rem;font-weight:700;cursor:pointer;
+  background:linear-gradient(135deg,var(--acc),#9B74FF);color:#fff;border:none;transition:.2s}
+.btn-view:hover{transform:translateY(-1px);box-shadow:0 6px 18px var(--acc-g)}
+
+/*  COURSE PAGE  */
+.course-page{max-width:1200px;margin:0 auto;padding:2rem}
+.back-btn{display:inline-flex;align-items:center;gap:.45rem;padding:.4rem .85rem;border-radius:8px;
+  background:rgba(255,255,255,.05);border:1px solid var(--border);color:var(--soft);cursor:pointer;
+  font-size:.82rem;font-weight:500;margin-bottom:1.5rem;transition:.2s;border:none}
+.back-btn:hover{background:rgba(255,255,255,.09);color:var(--fg)}
+
+/* Course header */
+.course-hdr{display:flex;gap:2rem;margin-bottom:2.5rem;flex-wrap:wrap}
+.course-hdr-thumb{width:120px;height:120px;border-radius:18px;display:flex;align-items:center;justify-content:center;font-size:3.5rem;flex-shrink:0}
+.course-hdr-info{flex:1;min-width:250px}
+.course-hdr-info .cat-badge{display:inline-block;padding:.22rem .7rem;border-radius:99px;font-size:.68rem;font-weight:700;margin-bottom:.6rem}
+.course-hdr-info h1{font-family:"Cabinet Grotesk",sans-serif;font-size:1.8rem;font-weight:900;letter-spacing:-.03em;margin-bottom:.4rem;line-height:1.2}
+.course-hdr-info p{font-size:.88rem;color:var(--soft);line-height:1.65;margin-bottom:.85rem;font-weight:300}
+.course-stats{display:flex;gap:1.2rem;flex-wrap:wrap}
+.cs-item{display:flex;align-items:center;gap:.35rem;font-size:.78rem;color:var(--muted)}
+.cs-item strong{color:var(--fg);font-weight:600}
+
+/* Layout: sidebar + content */
+.course-layout{display:grid;grid-template-columns:320px 1fr;gap:1.5rem;align-items:start}
+@media(max-width:900px){.course-layout{grid-template-columns:1fr}}
+
+/* Sidebar */
+.sidebar{background:var(--sfc);border:1px solid var(--border);border-radius:16px;overflow:hidden;position:sticky;top:76px}
+.sidebar-hdr{padding:1rem 1.2rem;border-bottom:1px solid var(--border);font-family:"Cabinet Grotesk",sans-serif;font-size:.92rem;font-weight:700}
+.module-item{border-bottom:1px solid var(--border)}
+.module-item:last-child{border-bottom:none}
+.module-header{display:flex;align-items:center;gap:.6rem;padding:.85rem 1.2rem;cursor:pointer;transition:.2s;user-select:none}
+.module-header:hover{background:rgba(255,255,255,.03)}
+.module-header.open{background:rgba(110,86,255,.07)}
+.mod-num{width:24px;height:24px;border-radius:6px;background:rgba(110,86,255,.15);display:grid;place-items:center;font-size:.72rem;font-weight:700;color:var(--acc2);flex-shrink:0}
+.mod-title{flex:1;font-size:.84rem;font-weight:600;line-height:1.3}
+.mod-meta{font-size:.7rem;color:var(--muted);margin-top:.1rem}
+.mod-arrow{font-size:.7rem;color:var(--muted);transition:.2s;flex-shrink:0}
+.module-header.open .mod-arrow{transform:rotate(90deg);color:var(--acc2)}
+.classes-list{display:none;background:rgba(0,0,0,.2)}
+.classes-list.open{display:block}
+.class-item{display:flex;align-items:center;gap:.6rem;padding:.65rem 1.2rem .65rem 1.5rem;cursor:pointer;transition:.2s;border-top:1px solid rgba(110,86,255,.06)}
+.class-item:hover{background:rgba(110,86,255,.06)}
+.class-item.active{background:rgba(110,86,255,.12);border-left:3px solid var(--acc)}
+.class-icon{font-size:.9rem;flex-shrink:0;width:18px;text-align:center}
+.class-name{flex:1;font-size:.8rem;font-weight:500;line-height:1.3}
+.class-dur{font-size:.68rem;color:var(--muted);flex-shrink:0}
+.class-done{width:16px;height:16px;border-radius:50%;border:1.5px solid var(--muted);flex-shrink:0;display:grid;place-items:center;font-size:.6rem}
+.class-done.done{background:var(--green);border-color:var(--green);color:#fff}
+
+/* Main content area */
+.content-area{background:var(--sfc);border:1px solid var(--border);border-radius:16px;overflow:hidden;min-height:500px}
+
+/* Generate prompt */
+.gen-prompt{display:flex;flex-direction:column;align-items:center;justify-content:center;padding:4rem 2rem;text-align:center;min-height:400px}
+.gen-prompt .gp-ico{font-size:3rem;margin-bottom:1rem}
+.gen-prompt h3{font-family:"Cabinet Grotesk",sans-serif;font-size:1.2rem;font-weight:800;margin-bottom:.5rem}
+.gen-prompt p{font-size:.85rem;color:var(--soft);margin-bottom:1.5rem;max-width:340px;line-height:1.65}
+
+/* Loading state */
+.loading-state{display:flex;flex-direction:column;align-items:center;justify-content:center;padding:3rem;min-height:300px}
+.spin{width:40px;height:40px;border-radius:50%;border:2.5px solid var(--border);border-top-color:var(--acc);animation:spin .75s linear infinite;margin-bottom:1rem}
+@keyframes spin{to{transform:rotate(360deg)}}
+.loading-state h3{font-family:"Cabinet Grotesk",sans-serif;font-size:.98rem;font-weight:700;margin-bottom:.3rem}
+.loading-state p{font-size:.78rem;color:var(--muted)}
+.pbar-t{height:3px;background:var(--sfc2);border-radius:99px;overflow:hidden;width:220px;margin-top:.85rem}
+.pbar-f{height:100%;background:linear-gradient(90deg,var(--acc),var(--cyan));border-radius:99px;transition:width .5s ease}
+
+/* Class content */
+.class-content{padding:1.5rem}
+.class-content-hdr{margin-bottom:1.25rem;padding-bottom:1.1rem;border-bottom:1px solid var(--border)}
+.class-content-hdr h2{font-family:"Cabinet Grotesk",sans-serif;font-size:1.2rem;font-weight:800;letter-spacing:-.02em;margin-bottom:.35rem}
+.class-badge-row{display:flex;gap:.5rem;flex-wrap:wrap}
+.cbadge{padding:.2rem .65rem;border-radius:99px;font-size:.68rem;font-weight:600}
+.cbadge-video{background:rgba(110,86,255,.15);color:var(--acc2)}
+.cbadge-assign{background:rgba(251,191,36,.12);color:var(--amber)}
+.cbadge-dur{background:rgba(255,255,255,.06);color:var(--soft)}
+
+/* Video player — handled inline in renderClassContent */
+
+/* Topics */
+.topics-row{display:flex;gap:.4rem;flex-wrap:wrap;margin-bottom:1.25rem}
+.topic-tag{padding:.24rem .72rem;border-radius:99px;font-size:.72rem;background:rgba(110,86,255,.1);border:1px solid rgba(110,86,255,.22);color:var(--acc2)}
+
+/* Key points */
+.key-points{margin-bottom:1.25rem}
+.kp-title{font-family:"Cabinet Grotesk",sans-serif;font-size:.95rem;font-weight:700;margin-bottom:.75rem}
+.kp-item{background:var(--sfc2);border:1px solid var(--border);border-radius:10px;padding:.9rem 1rem;margin-bottom:.6rem}
+.kp-item-hdr{font-size:.85rem;font-weight:700;color:var(--fg);margin-bottom:.3rem;display:flex;align-items:center;gap:.5rem}
+.kp-dot{width:8px;height:8px;border-radius:50%;background:var(--acc);flex-shrink:0}
+.kp-item p{font-size:.81rem;color:var(--soft);line-height:1.62;font-weight:300}
+
+/* Assignment */
+.assign-card{background:linear-gradient(135deg,rgba(251,191,36,.07),rgba(110,86,255,.05));border:1px solid rgba(251,191,36,.2);border-radius:12px;padding:1.25rem}
+.assign-hdr{display:flex;align-items:center;gap:.6rem;margin-bottom:.85rem}
+.assign-hdr h3{font-family:"Cabinet Grotesk",sans-serif;font-size:1rem;font-weight:800}
+.assign-badge{padding:.2rem .6rem;border-radius:99px;font-size:.65rem;font-weight:700;background:rgba(251,191,36,.15);color:var(--amber)}
+.assign-desc{font-size:.83rem;color:var(--soft);line-height:1.65;margin-bottom:.85rem;font-weight:300}
+.task-list{list-style:none;margin-bottom:.85rem}
+.task-list li{display:flex;align-items:flex-start;gap:.5rem;font-size:.82rem;color:var(--fg);margin-bottom:.45rem;line-height:1.5}
+.task-list li::before{content:"→";color:var(--acc2);flex-shrink:0;margin-top:1px}
+.rubric-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:.6rem;margin-bottom:.85rem}
+.rubric-item{background:rgba(0,0,0,.2);border:1px solid var(--border);border-radius:8px;padding:.6rem .75rem}
+.rubric-pts{font-family:"Cabinet Grotesk",sans-serif;font-size:1.1rem;font-weight:800;color:var(--acc2);margin-bottom:.2rem}
+.rubric-crit{font-size:.78rem;font-weight:600;color:var(--fg);margin-bottom:.2rem}
+.rubric-desc{font-size:.72rem;color:var(--muted);line-height:1.5}
+
+/* Download actions */
+.dl-actions{display:flex;gap:.6rem;flex-wrap:wrap;padding-top:1.1rem;border-top:1px solid var(--border);margin-top:1rem}
+.btn-dl{display:flex;align-items:center;gap:.4rem;padding:.5rem 1.1rem;border-radius:9px;font-size:.8rem;font-weight:700;cursor:pointer;border:none;transition:.2s}
+.btn-dl:hover{transform:translateY(-1px)}
+.btn-dl:disabled{opacity:.5;cursor:not-allowed;transform:none}
+.btn-ppt{background:linear-gradient(135deg,var(--acc),#9B74FF);color:#fff;box-shadow:0 4px 14px var(--acc-g)}
+.btn-ppt:hover{box-shadow:0 8px 22px var(--acc-g)}
+.btn-pdf{background:rgba(239,68,68,.12);color:var(--red);border:1px solid rgba(239,68,68,.22)}
+.btn-pdf:hover{background:rgba(239,68,68,.2)}
+.btn-mark{background:rgba(52,211,153,.1);color:var(--green);border:1px solid rgba(52,211,153,.2)}
+.btn-mark:hover{background:rgba(52,211,153,.18)}
+
+/* Progress bar on course page */
+.progress-bar-wrap{margin-bottom:1.5rem}
+.pb-label{display:flex;justify-content:space-between;font-size:.75rem;color:var(--muted);margin-bottom:.4rem}
+.pb-track{height:5px;background:var(--sfc2);border-radius:99px;overflow:hidden}
+.pb-fill{height:100%;background:linear-gradient(90deg,var(--acc),var(--cyan));border-radius:99px;transition:width .5s ease}
+
+/* Toast */
+.toast{position:fixed;bottom:1.5rem;right:1.5rem;z-index:400;background:var(--sfc2);border:1px solid var(--border2);border-radius:13px;
+  padding:.8rem 1.2rem;display:flex;align-items:center;gap:.65rem;font-size:.82rem;max-width:320px;
+  box-shadow:0 20px 55px rgba(0,0,0,.6);transform:translateY(90px);opacity:0;transition:.35s cubic-bezier(.16,1,.3,1);pointer-events:none}
+.toast.show{transform:none;opacity:1}
+
+/* Empty */
+.empty{text-align:center;padding:3.5rem 1rem;color:var(--muted);grid-column:1/-1}
+.empty span{font-size:2.8rem;display:block;margin-bottom:.75rem}
+.empty h3{font-family:"Cabinet Grotesk",sans-serif;font-size:1rem;color:var(--soft);margin-bottom:.35rem}
+.empty p{font-size:.79rem;line-height:1.6}
+
+@media(max-width:680px){
+  .nav-links{display:none}
+  h1{font-size:2.4rem}
+  .course-hdr{flex-direction:column}
+  .course-hdr-thumb{width:80px;height:80px;font-size:2.5rem}
+  .dl-actions{flex-direction:column}
+}
+
+/*  KEY POINTS with bullets  */
+.kp-bullets{list-style:none;margin-top:.45rem;padding:0}
+.kp-bullets li{font-size:.78rem;color:var(--soft);padding:.22rem 0 .22rem .9rem;position:relative;line-height:1.55}
+.kp-bullets li::before{content:"";position:absolute;left:0;color:var(--acc);font-size:.75rem}
+
+/*  Real world example box  */
+.rw-box{background:linear-gradient(135deg,rgba(34,211,238,.06),rgba(110,86,255,.04));border:1px solid rgba(34,211,238,.18);border-radius:12px;padding:1.1rem 1.2rem;margin-bottom:1.1rem}
+.rw-box-hdr{display:flex;align-items:center;gap:.5rem;font-size:.85rem;font-weight:700;color:var(--cyan);margin-bottom:.5rem}
+.rw-box p{font-size:.82rem;color:var(--soft);line-height:1.65}
+
+/*  MCQ Quiz  */
+.mcq-wrap{background:var(--sfc2);border:1px solid var(--border);border-radius:16px;overflow:hidden;margin-bottom:1.25rem}
+.mcq-header{padding:1.1rem 1.3rem;background:linear-gradient(135deg,rgba(251,191,36,.08),rgba(110,86,255,.06));border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:.6rem}
+.mcq-header-info h3{font-family:"Cabinet Grotesk",sans-serif;font-size:1.05rem;font-weight:800;margin-bottom:.25rem}
+.mcq-header-info p{font-size:.78rem;color:var(--soft)}
+.mcq-meta{display:flex;gap:.65rem}
+.mcq-meta span{padding:.22rem .65rem;border-radius:99px;font-size:.68rem;font-weight:600;background:rgba(251,191,36,.12);color:var(--amber)}
+.mcq-body{padding:1.3rem}
+.mcq-progress-bar{height:4px;background:var(--sfc);border-radius:99px;overflow:hidden;margin-bottom:1.3rem}
+.mcq-progress-fill{height:100%;background:linear-gradient(90deg,var(--acc),var(--cyan));border-radius:99px;transition:width .4s ease}
+.mcq-question-num{font-size:.72rem;font-weight:700;color:var(--acc2);letter-spacing:.04em;margin-bottom:.4rem;text-transform:uppercase}
+.mcq-question-text{font-family:"Cabinet Grotesk",sans-serif;font-size:1rem;font-weight:700;color:var(--fg);margin-bottom:.85rem;line-height:1.45}
+.mcq-diff{display:inline-block;padding:.15rem .55rem;border-radius:99px;font-size:.62rem;font-weight:700;margin-bottom:.85rem}
+.mcq-diff.easy{background:rgba(52,211,153,.12);color:var(--green)}
+.mcq-diff.medium{background:rgba(251,191,36,.12);color:var(--amber)}
+.mcq-diff.hard{background:rgba(248,113,113,.12);color:var(--red)}
+.mcq-options{display:flex;flex-direction:column;gap:.5rem;margin-bottom:1.1rem}
+.mcq-opt{display:flex;align-items:center;gap:.75rem;padding:.75rem 1rem;border-radius:10px;border:1.5px solid var(--border);background:var(--sfc);cursor:pointer;transition:.2s;font-size:.86rem;color:var(--soft);font-weight:500}
+.mcq-opt:hover{border-color:rgba(110,86,255,.3);background:rgba(110,86,255,.06);color:var(--fg)}
+.mcq-opt.selected{border-color:var(--acc);background:rgba(110,86,255,.1);color:var(--fg)}
+.mcq-opt.correct{border-color:var(--green);background:rgba(52,211,153,.1);color:var(--green)}
+.mcq-opt.wrong{border-color:var(--red);background:rgba(248,113,113,.08);color:var(--red)}
+.mcq-opt-key{width:28px;height:28px;border-radius:8px;background:rgba(110,86,255,.12);display:grid;place-items:center;font-size:.75rem;font-weight:700;color:var(--acc2);flex-shrink:0;transition:.2s}
+.mcq-opt.selected .mcq-opt-key{background:var(--acc);color:#fff}
+.mcq-opt.correct .mcq-opt-key{background:var(--green);color:#fff}
+.mcq-opt.wrong .mcq-opt-key{background:var(--red);color:#fff}
+.mcq-explanation{background:rgba(110,86,255,.07);border:1px solid rgba(110,86,255,.2);border-radius:10px;padding:.85rem 1rem;font-size:.82rem;color:var(--soft);line-height:1.6;margin-bottom:1rem;display:none}
+.mcq-explanation.show{display:block}
+.mcq-explanation strong{color:var(--acc2)}
+.mcq-actions{display:flex;align-items:center;justify-content:space-between;gap:.6rem;flex-wrap:wrap}
+.mcq-nav-btn{padding:.48rem 1.2rem;border-radius:9px;font-size:.82rem;font-weight:700;cursor:pointer;border:1px solid var(--border);background:rgba(255,255,255,.05);color:var(--soft);transition:.2s}
+.mcq-nav-btn:hover{background:rgba(255,255,255,.09);color:var(--fg)}
+.mcq-nav-btn:disabled{opacity:.35;cursor:not-allowed}
+.mcq-submit-btn{padding:.5rem 1.4rem;border-radius:9px;font-size:.82rem;font-weight:700;cursor:pointer;border:none;background:linear-gradient(135deg,var(--acc),#9B74FF);color:#fff;box-shadow:0 4px 14px var(--acc-g);transition:.2s}
+.mcq-submit-btn:hover{transform:translateY(-1px);box-shadow:0 8px 22px var(--acc-g)}
+.mcq-submit-btn:disabled{opacity:.5;cursor:not-allowed;transform:none}
+
+/* MCQ Results */
+.mcq-result{padding:2rem;text-align:center}
+.mcq-score-circle{width:120px;height:120px;border-radius:50%;margin:0 auto 1.2rem;display:flex;flex-direction:column;align-items:center;justify-content:center;position:relative}
+.mcq-score-num{font-family:"Cabinet Grotesk",sans-serif;font-size:2.2rem;font-weight:900;line-height:1}
+.mcq-score-pct{font-size:.78rem;color:var(--muted);margin-top:.15rem}
+.mcq-result-msg{font-family:"Cabinet Grotesk",sans-serif;font-size:1.3rem;font-weight:800;margin-bottom:.5rem}
+.mcq-result-sub{font-size:.85rem;color:var(--soft);margin-bottom:1.5rem}
+.mcq-result-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:.65rem;margin-bottom:1.5rem}
+.mcq-stat-card{background:var(--sfc);border:1px solid var(--border);border-radius:10px;padding:.85rem .7rem}
+.mcq-stat-val{font-family:"Cabinet Grotesk",sans-serif;font-size:1.4rem;font-weight:900;margin-bottom:.2rem}
+.mcq-stat-lbl{font-size:.72rem;color:var(--muted)}
+.mcq-retry-btn{padding:.52rem 1.4rem;border-radius:9px;font-size:.83rem;font-weight:700;cursor:pointer;border:1px solid var(--border);background:rgba(255,255,255,.05);color:var(--soft);transition:.2s;margin-right:.6rem}
+.mcq-retry-btn:hover{background:rgba(255,255,255,.09);color:var(--fg)}
+
+/*  Claude Chatbot  */
+.chat-fab{position:fixed;bottom:1.5rem;left:1.5rem;z-index:300;width:54px;height:54px;border-radius:50%;background:linear-gradient(135deg,var(--acc),#A855F7);border:none;cursor:pointer;display:grid;place-items:center;font-size:1.4rem;box-shadow:0 8px 28px rgba(110,86,255,.45);transition:.3s}
+.chat-fab:hover{transform:scale(1.1) translateY(-2px);box-shadow:0 12px 38px rgba(110,86,255,.55)}
+.chat-panel{position:fixed;bottom:1.5rem;left:1.5rem;z-index:301;width:380px;max-height:560px;background:var(--sfc);border:1px solid var(--border2);border-radius:18px;display:flex;flex-direction:column;box-shadow:0 30px 70px rgba(0,0,0,.7);transform:scale(.94) translateY(20px);opacity:0;pointer-events:none;transition:.3s cubic-bezier(.16,1,.3,1)}
+.chat-panel.open{transform:none;opacity:1;pointer-events:all}
+.chat-panel-hdr{padding:.85rem 1rem;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:.65rem}
+.chat-avatar{width:34px;height:34px;border-radius:10px;background:linear-gradient(135deg,var(--acc),#A855F7);display:grid;place-items:center;font-size:.9rem;flex-shrink:0}
+.chat-panel-hdr-info{flex:1}
+.chat-panel-hdr-info h4{font-family:"Cabinet Grotesk",sans-serif;font-size:.88rem;font-weight:800}
+.chat-panel-hdr-info p{font-size:.7rem;color:var(--soft)}
+.chat-close-btn{background:none;border:none;color:var(--muted);cursor:pointer;font-size:1rem;padding:.2rem;line-height:1}
+.chat-messages{flex:1;overflow-y:auto;padding:.85rem 1rem;display:flex;flex-direction:column;gap:.65rem;min-height:200px}
+.chat-msg{max-width:88%;font-size:.82rem;line-height:1.58}
+.chat-msg.user{align-self:flex-end;background:linear-gradient(135deg,var(--acc),#9B74FF);color:#fff;padding:.55rem .85rem;border-radius:13px 13px 3px 13px}
+.chat-msg.bot{align-self:flex-start;background:var(--sfc2);border:1px solid var(--border);color:var(--fg);padding:.55rem .85rem;border-radius:3px 13px 13px 13px}
+.chat-msg.bot pre{background:rgba(0,0,0,.3);border-radius:6px;padding:.5rem;overflow-x:auto;font-size:.75rem;margin:.4rem 0}
+.chat-msg.bot code{background:rgba(0,0,0,.25);padding:.1rem .3rem;border-radius:4px;font-size:.78rem}
+.chat-typing{display:flex;gap:4px;align-items:center;padding:.5rem .85rem}
+.chat-typing span{width:7px;height:7px;border-radius:50%;background:var(--acc);animation:typing .9s infinite}
+.chat-typing span:nth-child(2){animation-delay:.15s}
+.chat-typing span:nth-child(3){animation-delay:.3s}
+@keyframes typing{0%,80%,100%{transform:scale(.6);opacity:.5}40%{transform:scale(1);opacity:1}}
+.chat-input-row{display:flex;gap:.5rem;padding:.75rem 1rem;border-top:1px solid var(--border)}
+.chat-input{flex:1;background:var(--sfc2);border:1px solid var(--border);border-radius:10px;padding:.5rem .75rem;color:var(--fg);font-size:.82rem;outline:none;font-family:inherit;resize:none;line-height:1.4}
+.chat-input:focus{border-color:rgba(110,86,255,.4)}
+.chat-send-btn{width:36px;height:36px;border-radius:9px;background:linear-gradient(135deg,var(--acc),#A855F7);border:none;color:#fff;cursor:pointer;font-size:1rem;flex-shrink:0;transition:.2s;align-self:flex-end}
+.chat-send-btn:hover{transform:scale(1.06)}
+.chat-send-btn:disabled{opacity:.4;cursor:not-allowed;transform:none}
+.chat-close-inline-btn{width:36px;height:36px;border-radius:9px;background:rgba(248,113,113,.12);border:1px solid rgba(248,113,113,.25);color:var(--red);cursor:pointer;font-size:.72rem;font-weight:700;flex-shrink:0;transition:.2s;align-self:flex-end;letter-spacing:.03em}
+.chat-close-inline-btn:hover{background:rgba(248,113,113,.25);border-color:rgba(248,113,113,.5);transform:scale(1.06)}
+
+/* Voice button — search bar */
+.btn-voice{width:42px;height:42px;border-radius:10px;background:rgba(110,86,255,.12);border:1.5px solid rgba(110,86,255,.3);color:var(--acc2);cursor:pointer;display:grid;place-items:center;transition:.25s;flex-shrink:0;position:relative}
+.btn-voice:hover{background:rgba(110,86,255,.22);border-color:var(--acc);transform:scale(1.04)}
+.btn-voice.listening{background:rgba(239,68,68,.15);border-color:var(--red);color:var(--red);animation:voicePulse 1s ease-in-out infinite}
+.btn-voice svg{width:18px;height:18px;pointer-events:none}
+@keyframes voicePulse{0%,100%{box-shadow:0 0 0 0 rgba(239,68,68,.4)}50%{box-shadow:0 0 0 8px rgba(239,68,68,0)}}
+
+/* Voice ring indicator on search */
+.voice-ring{position:absolute;inset:-4px;border-radius:13px;border:2px solid var(--red);opacity:0;animation:voiceRing 1s ease-out infinite}
+@keyframes voiceRing{0%{opacity:.8;transform:scale(1)}100%{opacity:0;transform:scale(1.4)}}
+
+/* Voice button — chat */
+.chat-voice-btn{width:36px;height:36px;border-radius:9px;background:rgba(110,86,255,.12);border:1px solid rgba(110,86,255,.25);color:var(--acc2);cursor:pointer;display:grid;place-items:center;flex-shrink:0;transition:.2s;align-self:flex-end;position:relative}
+.chat-voice-btn:hover{background:rgba(110,86,255,.22);border-color:var(--acc);transform:scale(1.06)}
+.chat-voice-btn.listening{background:rgba(239,68,68,.15);border-color:var(--red);color:var(--red);animation:voicePulse 1s ease-in-out infinite}
+.chat-voice-btn svg{width:15px;height:15px;pointer-events:none}
+
+/* Voice status bar */
+.voice-status{display:none;align-items:center;gap:.5rem;padding:.38rem .85rem;background:rgba(239,68,68,.08);border:1px solid rgba(239,68,68,.2);border-radius:8px;font-size:.76rem;color:var(--red);margin:.4rem 0 0}
+.voice-status.show{display:flex}
+.voice-dot{width:8px;height:8px;border-radius:50%;background:var(--red);animation:blink 1s infinite;flex-shrink:0}
+.chat-suggestions{display:flex;gap:.4rem;flex-wrap:wrap;padding:.5rem 1rem 0}
+.chat-sug{padding:.22rem .7rem;border-radius:99px;font-size:.72rem;background:rgba(110,86,255,.1);border:1px solid rgba(110,86,255,.2);color:var(--acc2);cursor:pointer;transition:.2s}
+.chat-sug:hover{background:rgba(110,86,255,.2)}
+</style>
+</head>
+<body>
+<div class="aurora"><div class="ab a1"></div><div class="ab a2"></div></div>
+
+<!-- NAV -->
+<nav class="nav">
+  <div class="logo" onclick="goHome()">
+    <div class="logo-icon">CV</div>
+    <span class="logo-name">CVhelper<span>.ai</span></span>
+  </div>
+  <ul class="nav-links">
+    <li><a onclick="goHome()" class="on" id="nav-home">Home</a></li>
+    <li><a onclick="goHome()" id="nav-courses">My Courses</a></li>
+  </ul>
+  <div class="nav-r">
+    <span id="api-status" style="font-size:.75rem;color:var(--muted)">checking…</span>
+  </div>
+</nav>
+
+<!--  HOME PAGE  -->
+<div class="page active" id="page-home">
+  <section class="hero">
+    <div class="hero-pill"><span class="pill-dot"></span>AI Course Generator · Any Skill · Full Curriculum</div>
+    <h1>Learn <span class="grad">Any Skill</span><br/>With Full Courses</h1>
+    <p class="hero-desc">Type any skill and get a complete course — modules, video classes, assignments, downloadable PPT slides and PDF notes for every class.</p>
+
+    <div class="search-wrap">
+      <div class="search-bar">
+        <svg class="s-ico" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+        <input id="skill-inp" type="text" autocomplete="off" autocorrect="off" spellcheck="false" placeholder="Search any skill…" onkeydown="if(event.key==='Enter')genCourse()"/>
+        <select id="lvl-sel" class="s-level"><option>Beginner</option><option>Intermediate</option><option>Advanced</option></select>
+        <select id="dur-sel" class="s-dur">
+          <option value="2 weeks">2 Weeks</option>
+          <option value="4 weeks" selected>4 Weeks</option>
+          <option value="6 weeks">6 Weeks</option>
+          <option value="8 weeks">8 Weeks</option>
+          <option value="3 months">3 Months</option>
+        </select>
+        <button class="btn-voice" id="search-voice-btn" onclick="toggleSearchVoice()" title="Click to speak your skill">
+          <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" style="width:16px;height:16px;pointer-events:none">
+            <rect x="9" y="2" width="6" height="11" rx="3"/>
+            <path d="M5 10a7 7 0 0 0 14 0M12 19v3M9 22h6"/>
+          </svg>
+        </button>
+        <button class="btn-gen" id="gen-btn" onclick="genCourse()">Generate</button>
+      </div>
+      <div class="voice-status" id="search-voice-status">
+        <span class="voice-dot"></span>
+        <span id="search-voice-text">Listening… say your skill now</span>
+      </div>
+    </div>
+
+    <div class="quick-sug">
+      <button class="qs" onclick="qs('Guitar Playing')"> Guitar</button>
+      <button class="qs" onclick="qs('Python Programming')"> Python</button>
+      <button class="qs" onclick="qs('Italian Cooking')"> Italian Cooking</button>
+      <button class="qs" onclick="qs('Yoga & Meditation')"> Yoga</button>
+      <button class="qs" onclick="qs('Stock Market Investing')"> Investing</button>
+      <button class="qs" onclick="qs('Public Speaking')"> Public Speaking</button>
+      <button class="qs" onclick="qs('Watercolour Painting')"> Watercolour</button>
+      <button class="qs" onclick="qs('Photography Basics')"> Photography</button>
+    </div>
+
+    <div class="h-stats">
+      <div><div class="hs-v">∞</div><div class="hs-l">SKILLS</div></div>
+      <div><div class="hs-v">4</div><div class="hs-l">MODULES</div></div>
+      <div><div class="hs-v">12</div><div class="hs-l">CLASSES</div></div>
+      <div><div class="hs-v">PPT+PDF</div><div class="hs-l">DOWNLOADS</div></div>
+    </div>
+  </section>
+
+  <div class="sec">
+    <div class="sec-hdr">
+      <h2>Generated Courses</h2>
+      <span id="course-count" style="font-size:.75rem;color:var(--muted)"></span>
+    </div>
+    <div class="cg" id="home-grid">
+      <div class="empty"><span></span><h3>No courses yet</h3><p>Type any skill above and hit Generate to create your first AI-powered course.</p></div>
+    </div>
+  </div>
+</div>
+
+<!--  COURSE PAGE  -->
+<div class="page" id="page-course">
+  <div class="course-page">
+    <button class="back-btn" onclick="goHome()">← Back to courses</button>
+
+    <!-- Course Header -->
+    <div class="course-hdr" id="course-hdr"></div>
+
+    <!-- Progress -->
+    <div class="progress-bar-wrap">
+      <div class="pb-label"><span>Your Progress</span><span id="prog-text">0%</span></div>
+      <div class="pb-track"><div class="pb-fill" id="prog-fill" style="width:0%"></div></div>
+    </div>
+
+    <!-- Layout -->
+    <div class="course-layout">
+      <!-- Sidebar: modules + classes -->
+      <div class="sidebar">
+        <div class="sidebar-hdr"> Course Curriculum</div>
+        <div id="sidebar-modules"></div>
+      </div>
+
+      <!-- Content area -->
+      <div class="content-area" id="content-area">
+        <div class="gen-prompt">
+          <div class="gp-ico"></div>
+          <h3>Select a class to begin</h3>
+          <p>Choose any class from the curriculum on the left to start learning.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Toast -->
+<div class="toast" id="toast"><span id="t-ico"></span><span id="t-msg">Done!</span></div>
+
+<!-- Claude Chatbot FAB -->
+<button class="chat-fab" id="chat-fab" onclick="toggleChat()" title="Ask CVhelper AI"></button>
+
+<!-- Chat Panel -->
+<div class="chat-panel" id="chat-panel">
+  <div class="chat-panel-hdr">
+    <div class="chat-avatar"></div>
+    <div class="chat-panel-hdr-info">
+      <h4>CVhelper AI</h4>
+      <p id="chat-context-label">Your personal learning assistant</p>
+    </div>
+    <button class="chat-close-btn" onclick="toggleChat()"></button>
+  </div>
+  <div class="chat-suggestions" id="chat-suggestions">
+    <button class="chat-sug" onclick="chatSuggest('Explain this topic simply')">Explain simply</button>
+    <button class="chat-sug" onclick="chatSuggest('Give me a real example')">Real example</button>
+    <button class="chat-sug" onclick="chatSuggest('Quiz me on this class')">Quiz me</button>
+    <button class="chat-sug" onclick="chatSuggest('Download PPT for this class')" style="background:rgba(110,86,255,.18);border-color:rgba(110,86,255,.4);color:var(--acc2);font-weight:700">Download PPT</button>
+  </div>
+  <div class="chat-messages" id="chat-messages">
+    <div class="chat-msg bot">Hi! I am CVhelper AI. Ask me anything about your course, concepts, or learning goals. I am here to help you master every topic!</div>
+  </div>
+  <div class="chat-input-row">
+    <textarea class="chat-input" id="chat-input" rows="1" placeholder="Ask anything..." onkeydown="if(event.key==='Enter'&&!event.shiftKey){event.preventDefault();sendChat()}" oninput="this.style.height='auto';this.style.height=Math.min(this.scrollHeight,120)+'px'"></textarea>
+    <button class="chat-voice-btn" id="chat-voice-btn" onclick="toggleChatVoice()" title="Voice input">
+      <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" style="width:15px;height:15px;pointer-events:none">
+        <rect x="9" y="2" width="6" height="11" rx="3"/>
+        <path d="M5 10a7 7 0 0 0 14 0M12 19v3M9 22h6"/>
+      </svg>
+    </button>
+    <button class="chat-send-btn" id="chat-send-btn" onclick="sendChat()">Send</button>
+    <button class="chat-close-inline-btn" onclick="toggleChat()" title="Close chat">X</button>
+  </div>
+</div>
+
+<script>
+/* 
+   CVhelper.ai v3 — Frontend
+    */
+
+const API = "http://127.0.0.1:5001";
+let courses       = [];
+let activeCourse  = null;
+let activeClass   = null;
+let classContent  = {};
+let completedClasses = new Set();
+
+/*  API health check  */
+async function checkHealth() {
+  try {
+    const r = await fetch(API + "/api/health");
+    const d = await r.json();
+    const el = document.getElementById("api-status");
+    const hasKey = d.gemini_key_set || d.groq_key_set || d.key_set;
+    if (hasKey) {
+      const engineLabel = d.engine || "AI";
+      const engineIcon  = engineLabel.includes("Gemini") ? "✦" : "⚡";
+      el.innerHTML = `<span style="color:var(--green)">● Connected · ${engineIcon} ${engineLabel}</span>`;
+    } else {
+      el.innerHTML = '<span style="color:var(--amber)">● Add GEMINI_API_KEY or GROQ_API_KEY to .env</span>';
+    }
+  } catch {
+    document.getElementById("api-status").innerHTML = '<span style="color:var(--red)">● Backend offline — run: python app.py</span>';
+  }
+}
+
+async function call(path, body) {
+  const r = await fetch(API + path, {
+    method: body ? "POST" : "GET",
+    headers: {"Content-Type":"application/json"},
+    ...(body ? {body: JSON.stringify(body)} : {})
+  });
+  if (!r.ok) throw new Error(`HTTP ${r.status}`);
+  return r.json();
+}
+
+/*  Navigation  */
+function goHome() {
+  document.getElementById("page-home").classList.add("active");
+  document.getElementById("page-course").classList.remove("active");
+  renderHomeGrid();
+}
+
+function goCoursePage(courseId) {
+  activeCourse = courses.find(c => c.id === courseId);
+  if (!activeCourse) return;
+  document.getElementById("page-home").classList.remove("active");
+  document.getElementById("page-course").classList.add("active");
+  renderCoursePage();
+}
+
+/*  Generate Course  */
+async function genCourse() {
+  const skill = document.getElementById("skill-inp").value.trim();
+  const level = document.getElementById("lvl-sel").value;
+  const dur   = document.getElementById("dur-sel").value;
+  if (!skill) { toast(" Please enter a skill"); return; }
+
+  const btn = document.getElementById("gen-btn");
+  btn.disabled = true; btn.textContent = "Generating…";
+  toast(` Building full course for "${skill}"…`, 15000);
+
+  try {
+    const {ok, course, error} = await call("/api/generate-course", {skill, level, duration: dur, language: "English"});
+    if (!ok) throw new Error(error);
+
+    course.isAI = true;
+    course.createdAt = Date.now();
+    courses = [course, ...courses.filter(c => c.id !== course.id)];
+    renderHomeGrid();
+    toast(` "${course.title}" course created!`, 4000);
+    setTimeout(() => goCoursePage(course.id), 600);
+  } catch(e) {
+    const msg = e.message.includes("Failed to fetch")
+      ? "Backend not running — run: python app.py"
+      : e.message;
+    toast(" " + msg, 5000);
+  } finally {
+    btn.disabled = false; btn.textContent = " Generate";
+  }
+}
+
+function qs(skill) {
+  document.getElementById("skill-inp").value = skill;
+  genCourse();
+}
+
+/*  Home Grid  */
+function renderHomeGrid() {
+  const grid = document.getElementById("home-grid");
+  document.getElementById("course-count").textContent = courses.length ? `${courses.length} course${courses.length>1?"s":""}` : "";
+
+  if (!courses.length) {
+    grid.innerHTML = `<div class="empty"><span></span><h3>No courses yet</h3><p>Type any skill above and hit Generate to create your first AI-powered course.</p></div>`;
+    return;
+  }
+
+  grid.innerHTML = courses.map(c => {
+    const catStyle = `background:${c.color}28;color:${c.color}`;
+    const totalClasses = (c.modules||[]).reduce((a,m)=>a+(m.classes||[]).length,0);
+    const done = (c.modules||[]).reduce((a,m)=>(m.classes||[]).reduce((b,cl)=>b+(completedClasses.has(c.id+"-"+cl.id)?1:0),a),0);
+    const pct  = totalClasses ? Math.round(done/totalClasses*100) : 0;
+    return `
+    <div class="cc" onclick="goCoursePage('${c.id}')">
+      <div class="cc-thumb" style="background:linear-gradient(135deg,${c.color}1A 0%,var(--bg) 100%)">
+        <span class="cc-emo">${c.emoji}</span>
+        <div class="cc-shine"></div>
+        <span class="cc-cat" style="${catStyle}">${c.category||c.cat}</span>
+        <span class="cc-lvl">${c.level}</span>
+        ${c.isAI?'<span class="ai-tag"> AI</span>':''}
+      </div>
+      <div class="cc-body">
+        <h3>${c.title}</h3>
+        <p>${(c.description||c.desc||"").slice(0,100)}…</p>
+        <div class="cc-meta">
+          <span> ${(c.modules||[]).length} modules</span>
+          <span> ${totalClasses} classes</span>
+          <span>⏱ ${c.duration}</span>
+          <span> ${c.level}</span>
+        </div>
+        <div class="cc-foot">
+          <div class="cc-info">${pct}% complete</div>
+          <button class="btn-view" onclick="event.stopPropagation();goCoursePage('${c.id}')">Open Course →</button>
+        </div>
+      </div>
+    </div>`;
+  }).join("");
+}
+
+/*  Download Course PPT from Home  */
+async function dlCourseFromHome(courseId) {
+  const c   = courses.find(x => x.id === courseId);
+  if (!c) return;
+  const btn = document.getElementById('home-dl-' + courseId);
+  if (btn) { btn.disabled=true; btn.innerHTML='<div style="width:13px;height:13px;border:2px solid rgba(110,86,255,.3);border-top-color:var(--acc);border-radius:50%;animation:spin .7s linear infinite"></div> Generating…'; }
+  toast(` Generating Complete Course PPT for "${c.title}"…`, 15000);
+  try {
+    const {ok, b64, filename, error} = await call("/api/generate-course-pptx", {course: c});
+    if (!ok) throw new Error(error);
+    triggerDownload(b64, filename, "application/vnd.openxmlformats-officedocument.presentationml.presentation");
+    toast(` "${c.title}" Complete PPT downloaded!`, 4000);
+  } catch(e) {
+    toast(" " + e.message, 4000);
+  } finally {
+    if (btn) { btn.disabled=false; btn.innerHTML=' Download Complete Course PPT'; }
+  }
+}
+
+/*  Course Page  */
+function renderCoursePage() {
+  const c = activeCourse;
+  if (!c) return;
+
+  // Header
+  const catStyle = `background:${c.color}28;color:${c.color}`;
+  document.getElementById("course-hdr").innerHTML = `
+    <div class="course-hdr-thumb" style="background:linear-gradient(135deg,${c.color}22,${c.color}08)">${c.emoji}</div>
+    <div class="course-hdr-info">
+      <span class="cat-badge" style="${catStyle}">${c.category||"Course"}</span>
+      <h1>${c.title}</h1>
+      <p>${c.description||""}</p>
+      <div class="course-stats">
+        <span class="cs-item"> <strong>${(c.modules||[]).length} Modules</strong></span>
+        <span class="cs-item"> <strong>${(c.modules||[]).reduce((a,m)=>a+(m.classes||[]).length,0)} Classes</strong></span>
+        <span class="cs-item">⏱ <strong>${c.duration}</strong></span>
+        <span class="cs-item"> <strong>${c.level}</strong></span>
+        <span class="cs-item">⏰ <strong>${c.totalHours||"?"} hours</strong></span>
+      </div>
+    </div>
+    <div style="display:flex;gap:.5rem;margin-top:.75rem;flex-wrap:wrap">
+      <button onclick="dlFullCoursePPT()" id="dl-course-ppt-btn" style="display:inline-flex;align-items:center;gap:.35rem;padding:.35rem .85rem;border-radius:7px;background:linear-gradient(135deg,#6E56FF,#A855F7);color:#fff;border:none;cursor:pointer;font-size:.75rem;font-weight:600;transition:.2s;box-shadow:0 3px 10px rgba(110,86,255,.25)">
+        PPT Download Full Course
+      </button>
+    </div>`;
+
+  updateProgress();
+  renderSidebar();
+
+  document.getElementById("content-area").innerHTML = `
+    <div class="gen-prompt">
+      <div class="gp-ico"></div>
+      <h3>Select a class to begin</h3>
+      <p>Choose any class from the curriculum on the left to start learning.</p>
+    </div>`;
+}
+
+function updateProgress() {
+  const c = activeCourse;
+  if (!c) return;
+  const total = (c.modules||[]).reduce((a,m)=>a+(m.classes||[]).length,0);
+  const done  = (c.modules||[]).reduce((a,m)=>(m.classes||[]).reduce((b,cl)=>b+(completedClasses.has(c.id+"-"+cl.id)?1:0),a),0);
+  const pct   = total ? Math.round(done/total*100) : 0;
+  document.getElementById("prog-fill").style.width = pct+"%";
+  document.getElementById("prog-text").textContent = pct+"%";
+}
+
+/*  Sidebar  */
+function renderSidebar() {
+  const c = activeCourse;
+  document.getElementById("sidebar-modules").innerHTML = (c.modules||[]).map((mod,mi) => {
+    const classes = (mod.classes||[]).map((cls,ci) => {
+      const key  = c.id+"-"+cls.id;
+      const done = completedClasses.has(key);
+      const ico  = cls.type==="assignment" ? "" : cls.hasVideo ? "" : "";
+      const isActive = activeClass && activeClass.classId===cls.id && activeClass.moduleId===mod.id;
+      return `
+        <div class="class-item ${isActive?"active":""}" onclick="openClass(${mi},${ci})">
+          <span class="class-icon">${ico}</span>
+          <div style="flex:1;min-width:0">
+            <div class="class-name">${cls.title}</div>
+          </div>
+          <span class="class-dur">${cls.duration}</span>
+          <div class="class-done ${done?"done":""}">${done?"":""}</div>
+        </div>`;
+    }).join("");
+
+    const doneCount = (mod.classes||[]).filter(cl=>completedClasses.has(c.id+"-"+cl.id)).length;
+    const isOpen = activeClass && (c.modules||[]).findIndex(m=>m.id===mod.id)===mi;
+    return `
+      <div class="module-item">
+        <div class="module-header ${isOpen?"open":""}" onclick="toggleModule(this)">
+          <div class="mod-num">${mi+1}</div>
+          <div>
+            <div class="mod-title">${mod.title}</div>
+            <div class="mod-meta">${mod.classes.length} classes · ${doneCount}/${mod.classes.length} done</div>
+          </div>
+          <span class="mod-arrow"></span>
+        </div>
+        <div class="classes-list ${isOpen?"open":""}">${classes}</div>
+      </div>`;
+  }).join("");
+}
+
+function toggleModule(el) {
+  el.classList.toggle("open");
+  const list = el.nextElementSibling;
+  list.classList.toggle("open");
+}
+
+/*  Open Class  */
+async function openClass(moduleIdx, classIdx) {
+  const c   = activeCourse;
+  const mod = c.modules[moduleIdx];
+  const cls = mod.classes[classIdx];
+  activeClass = {moduleId: mod.id, classId: cls.id, moduleIdx, classIdx};
+
+  renderSidebar();
+
+  // Show loading
+  document.getElementById("content-area").innerHTML = `
+    <div class="loading-state">
+      <div class="spin"></div>
+      <h3>Loading class content…</h3>
+      <p>Groq AI is preparing your lesson</p>
+      <div class="pbar-t"><div class="pbar-f" id="cpbar" style="width:10%"></div></div>
+    </div>`;
+
+  // Animate progress bar
+  let pct = 10;
+  const iv = setInterval(()=>{ pct=Math.min(pct+15,90); const b=document.getElementById("cpbar"); if(b)b.style.width=pct+"%"; },500);
+
+  try {
+    // Check cache
+    const cacheKey = c.id+"-"+cls.id;
+    if (!classContent[cacheKey]) {
+      const {ok, content} = await call("/api/generate-class-content", {
+        courseTitle: c.title,
+        moduleTitle: mod.title,
+        classTitle:  cls.title,
+        topics:      cls.topics||[],
+        level:       c.level||"Beginner",
+        lang:        c.lang||"",
+      });
+      if (!ok) throw new Error("Failed to generate class content");
+      classContent[cacheKey] = content;
+    }
+    clearInterval(iv);
+    renderClassContent(mod, cls, classContent[cacheKey]);
+  } catch(e) {
+    clearInterval(iv);
+    document.getElementById("content-area").innerHTML = `
+      <div class="gen-prompt">
+        <div class="gp-ico"></div>
+        <h3>Failed to load class</h3>
+        <p>${e.message}</p>
+        <button class="btn btn-acc" onclick="openClass(${moduleIdx},${classIdx})">Try Again</button>
+      </div>`;
+  }
+}
+
+
+/*  Video Player Builder  */
+function buildVideoPlayer(cls, content) {
+  window._lessonContent = content;
+  window._lessonCls = cls;
+  return `<div id="video-box" style="border-radius:12px;overflow:hidden;margin-bottom:1.25rem;border:1px solid var(--border)">
+
+    <!-- THUMBNAIL -->
+    <div id="vid-thumb" onclick="startAIVideo()" style="background:linear-gradient(135deg,#0a0520,#150a35);aspect-ratio:16/9;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1.2rem;cursor:pointer;position:relative;">
+      <div style="position:absolute;inset:0;background:radial-gradient(ellipse at 50% 60%,rgba(110,86,255,.25),transparent 70%)"></div>
+      <!-- Animated bars -->
+      <div style="display:flex;align-items:flex-end;gap:5px;height:44px;position:relative;z-index:1">
+        <div style="width:6px;background:linear-gradient(to top,#6E56FF,#A78BFA);border-radius:3px;animation:bar1 1s ease-in-out infinite;height:22px"></div>
+        <div style="width:6px;background:linear-gradient(to top,#6E56FF,#A78BFA);border-radius:3px;animation:bar2 1s ease-in-out infinite .15s;height:34px"></div>
+        <div style="width:6px;background:linear-gradient(to top,#6E56FF,#22D3EE);border-radius:3px;animation:bar1 1s ease-in-out infinite .3s;height:18px"></div>
+        <div style="width:6px;background:linear-gradient(to top,#6E56FF,#22D3EE);border-radius:3px;animation:bar2 1s ease-in-out infinite .45s;height:38px"></div>
+        <div style="width:6px;background:linear-gradient(to top,#A78BFA,#F472B6);border-radius:3px;animation:bar1 1s ease-in-out infinite .6s;height:26px"></div>
+      </div>
+      <!-- Play button -->
+      <div style="width:76px;height:76px;border-radius:50%;background:linear-gradient(135deg,#6E56FF,#A855F7);display:grid;place-items:center;box-shadow:0 0 50px rgba(110,86,255,.6);transition:.25s">
+        <div style="border-style:solid;border-width:12px 0 12px 24px;border-color:transparent transparent transparent #fff;margin-left:6px"></div>
+      </div>
+      <div style="text-align:center;position:relative;z-index:1">
+        <div style="color:#fff;font-size:1rem;font-weight:700;margin-bottom:.3rem">${cls.title}</div>
+        <div style="color:rgba(255,255,255,.5);font-size:.78rem"> Click to start AI lesson</div>
+      </div>
+      <div style="position:absolute;top:.75rem;right:.75rem;background:linear-gradient(90deg,#6E56FF,#A855F7);padding:.22rem .65rem;border-radius:5px;font-size:.68rem;font-weight:700;color:#fff">AI Video</div>
+    </div>
+
+    <!-- VIDEO PLAYER -->
+    <div id="vid-player" style="display:none;background:#000;flex-direction:column;position:relative">
+      <!-- Canvas for animation -->
+      <canvas id="vid-canvas" style="width:100%;aspect-ratio:16/9;display:block;background:#050510"></canvas>
+      <!-- Controls -->
+      <div style="padding:.85rem 1.25rem;background:rgba(5,5,20,.95);border-top:1px solid rgba(110,86,255,.2)">
+        <!-- Progress -->
+        <div id="vid-prog-wrap" style="height:4px;background:rgba(255,255,255,.1);border-radius:99px;margin-bottom:.85rem;cursor:pointer" onclick="vidProgClick(event,this)">
+          <div id="vid-prog" style="height:100%;background:linear-gradient(90deg,#6E56FF,#22D3EE);border-radius:99px;width:0%;transition:width .2s"></div>
+        </div>
+        <div style="display:flex;align-items:center;gap:.85rem">
+          <button id="vid-btn-play" onclick="vidPlayPause()" style="background:linear-gradient(135deg,#6E56FF,#A855F7);border:none;color:#fff;width:36px;height:36px;border-radius:50%;cursor:pointer;font-size:1rem;display:grid;place-items:center">⏸</button>
+          <button onclick="vidRestart()" style="background:rgba(255,255,255,.08);border:none;color:rgba(255,255,255,.6);width:32px;height:32px;border-radius:50%;cursor:pointer;font-size:.85rem">↺</button>
+          <span id="vid-time-label" style="font-size:.75rem;color:rgba(255,255,255,.5);min-width:80px">0:00 / 0:00</span>
+          <div style="flex:1"></div>
+          <div id="vid-status" style="font-size:.72rem;color:rgba(110,86,255,.8);display:flex;align-items:center;gap:.35rem">
+            <div style="width:7px;height:7px;border-radius:50%;background:#6E56FF;animation:blink 1.5s infinite"></div>
+            AI Speaking
+          </div>
+          <button onclick="vidClose()" style="background:rgba(255,255,255,.07);border:none;color:rgba(255,255,255,.4);padding:.3rem .75rem;border-radius:6px;cursor:pointer;font-size:.75rem"></button>
+        </div>
+      </div>
+    </div>
+  </div>`;
+}
+
+function startAIVideo() {
+  const cls     = window._lessonCls;
+  const content = window._lessonContent;
+  const script  = content.videoScript || "Welcome to this lesson about " + cls.title + ". " + (content.keyPoints||[]).map(k=>typeof k==="object"?k.heading+". "+k.body:k).join(". ");
+  const points  = content.keyPoints || [];
+  const topics  = cls.topics || [];
+
+  document.getElementById('vid-thumb').style.display  = 'none';
+  const player = document.getElementById('vid-player');
+  player.style.display = 'flex';
+  player.style.flexDirection = 'column';
+
+  // Setup canvas
+  const canvas = document.getElementById('vid-canvas');
+  const ctx    = canvas.getContext('2d');
+  canvas.width  = 1280;
+  canvas.height = 720;
+
+  // Split script into sentences
+  const sentences = script.match(/[^.!?]+[.!?]+/g) || [script];
+  let sentIdx = 0;
+  let charIdx = 0;
+  let frame   = 0;
+  let paused  = false;
+  let startTime = Date.now();
+  const totalDuration = sentences.length * 4000; // ~4s per sentence
+
+  window._vidPaused  = false;
+  window._vidStopped = false;
+
+  // Text-to-speech
+  window.speechSynthesis.cancel();
+  const utterance = new SpeechSynthesisUtterance(script);
+  utterance.rate   = 0.92;
+  utterance.pitch  = 1.05;
+  utterance.volume = 1;
+  // Pick a good voice
+  const voices = window.speechSynthesis.getVoices();
+  const engVoice = voices.find(v => v.lang.startsWith('en') && v.name.includes('Google')) ||
+                   voices.find(v => v.lang.startsWith('en')) || voices[0];
+  if (engVoice) utterance.voice = engVoice;
+
+  utterance.onend = () => {
+    const btn = document.getElementById('vid-btn-play');
+    const status = document.getElementById('vid-status');
+    if (btn) btn.textContent = '';
+    if (status) status.innerHTML = '<div style="width:7px;height:7px;border-radius:50%;background:#34D399"></div> Completed';
+  };
+
+  window.speechSynthesis.speak(utterance);
+  window._currentUtterance = utterance;
+
+  // Color palette for slides
+  const colors = ['#6E56FF','#A855F7','#22D3EE','#F472B6','#34D399','#FBBF24'];
+
+  function drawFrame() {
+    if (window._vidStopped) return;
+    frame++;
+
+    const elapsed  = Date.now() - startTime;
+    const progress = Math.min(elapsed / totalDuration, 1);
+    sentIdx = Math.floor(progress * sentences.length);
+
+    // Background
+    ctx.fillStyle = '#050510';
+    ctx.fillRect(0, 0, 1280, 720);
+
+    // Animated gradient bg
+    const grad = ctx.createRadialGradient(640, 360, 0, 640, 360, 600);
+    const c = colors[sentIdx % colors.length];
+    grad.addColorStop(0, c + '18');
+    grad.addColorStop(1, 'transparent');
+    ctx.fillStyle = grad;
+    ctx.fillRect(0, 0, 1280, 720);
+
+    // Floating particles
+    for (let i = 0; i < 12; i++) {
+      const x = (Math.sin(frame * 0.02 + i * 1.2) * 0.4 + 0.5) * 1280;
+      const y = (Math.cos(frame * 0.015 + i * 0.9) * 0.4 + 0.5) * 720;
+      const r = 3 + Math.sin(frame * 0.05 + i) * 2;
+      ctx.beginPath();
+      ctx.arc(x, y, r, 0, Math.PI * 2);
+      ctx.fillStyle = c + '60';
+      ctx.fill();
+    }
+
+    // Current sentence box
+    const sent = sentences[Math.min(sentIdx, sentences.length-1)] || "";
+    ctx.fillStyle = 'rgba(110,86,255,0.12)';
+    roundRect(ctx, 80, 200, 1120, 200, 20);
+    ctx.fill();
+    ctx.strokeStyle = c + '60';
+    ctx.lineWidth = 1.5;
+    roundRect(ctx, 80, 200, 1120, 200, 20);
+    ctx.stroke();
+
+    // Sentence text
+    ctx.fillStyle = '#FFFFFF';
+    ctx.font = 'bold 32px Arial';
+    ctx.textAlign = 'center';
+    wrapText(ctx, sent.trim(), 640, 270, 1000, 42);
+
+    // Topic pill at top
+    const topic = topics[sentIdx % Math.max(topics.length,1)] || cls.title;
+    ctx.fillStyle = c + 'CC';
+    roundRect(ctx, 490, 120, 300, 44, 22);
+    ctx.fill();
+    ctx.fillStyle = '#fff';
+    ctx.font = 'bold 18px Arial';
+    ctx.textAlign = 'center';
+    ctx.fillText(topic.slice(0,30), 640, 148);
+
+    // Slide number
+    ctx.fillStyle = 'rgba(255,255,255,0.25)';
+    ctx.font = '16px Arial';
+    ctx.textAlign = 'right';
+    ctx.fillText(`${Math.min(sentIdx+1, sentences.length)} / ${sentences.length}`, 1240, 700);
+
+    // Course title bottom
+    ctx.fillStyle = 'rgba(255,255,255,0.35)';
+    ctx.font = '18px Arial';
+    ctx.textAlign = 'left';
+    ctx.fillText((activeCourse ? activeCourse.title : ''), 40, 700);
+
+    // Sound wave animation at bottom
+    ctx.strokeStyle = c + 'AA';
+    ctx.lineWidth = 2;
+    ctx.beginPath();
+    for (let x = 0; x < 1280; x += 4) {
+      const amp = window._vidPaused ? 2 : 8 + Math.sin(x * 0.03 + frame * 0.15) * 6;
+      const y = 440 + Math.sin(x * 0.02 + frame * 0.1) * amp;
+      x === 0 ? ctx.moveTo(x, y) : ctx.lineTo(x, y);
+    }
+    ctx.stroke();
+
+    // Update progress bar
+    const prog = document.getElementById('vid-prog');
+    const timeLabel = document.getElementById('vid-time-label');
+    if (prog) prog.style.width = (progress * 100) + '%';
+    if (timeLabel) {
+      const e = Math.floor(elapsed/1000), t = Math.floor(totalDuration/1000);
+      timeLabel.textContent = fmt(e) + ' / ' + fmt(t);
+    }
+
+    if (!window._vidPaused) {
+      requestAnimationFrame(drawFrame);
+    }
+  }
+
+  requestAnimationFrame(drawFrame);
+  window._drawFrame = drawFrame;
+}
+
+function roundRect(ctx, x, y, w, h, r) {
+  ctx.beginPath();
+  ctx.moveTo(x+r, y);
+  ctx.lineTo(x+w-r, y);
+  ctx.quadraticCurveTo(x+w, y, x+w, y+r);
+  ctx.lineTo(x+w, y+h-r);
+  ctx.quadraticCurveTo(x+w, y+h, x+w-r, y+h);
+  ctx.lineTo(x+r, y+h);
+  ctx.quadraticCurveTo(x, y+h, x, y+h-r);
+  ctx.lineTo(x, y+r);
+  ctx.quadraticCurveTo(x, y, x+r, y);
+  ctx.closePath();
+}
+
+function wrapText(ctx, text, x, y, maxW, lineH) {
+  const words = text.split(' ');
+  let line = '';
+  let ly = y;
+  for (let n = 0; n < words.length; n++) {
+    const test = line + words[n] + ' ';
+    if (ctx.measureText(test).width > maxW && n > 0) {
+      ctx.fillText(line, x, ly);
+      line = words[n] + ' ';
+      ly += lineH;
+    } else {
+      line = test;
+    }
+  }
+  ctx.fillText(line, x, ly);
+}
+
+function fmt(s) { return Math.floor(s/60)+':'+(s%60<10?'0':'')+Math.floor(s%60); }
+
+function vidPlayPause() {
+  window._vidPaused = !window._vidPaused;
+  const btn = document.getElementById('vid-btn-play');
+  const status = document.getElementById('vid-status');
+  if (window._vidPaused) {
+    window.speechSynthesis.pause();
+    if (btn) btn.textContent = '';
+    if (status) status.innerHTML = '<div style="width:7px;height:7px;border-radius:50%;background:#FBBF24"></div> Paused';
+  } else {
+    window.speechSynthesis.resume();
+    if (btn) btn.textContent = '⏸';
+    if (status) status.innerHTML = '<div style="width:7px;height:7px;border-radius:50%;background:#6E56FF;animation:blink 1.5s infinite"></div> AI Speaking';
+    requestAnimationFrame(window._drawFrame);
+  }
+}
+
+function vidRestart() {
+  window.speechSynthesis.cancel();
+  window._vidStopped = true;
+  setTimeout(() => {
+    window._vidStopped = false;
+    window._vidPaused  = false;
+    const btn = document.getElementById('vid-btn-play');
+    if (btn) btn.textContent = '⏸';
+    startAIVideo();
+  }, 200);
+}
+
+function vidClose() {
+  window.speechSynthesis.cancel();
+  window._vidStopped = true;
+  window._vidPaused  = false;
+  document.getElementById('vid-player').style.display = 'none';
+  document.getElementById('vid-thumb').style.display  = 'flex';
+}
+
+function vidProgClick(e, bar) {
+  const pct = e.offsetX / bar.offsetWidth;
+  window._startTime = Date.now() - pct * (window._totalDuration || 30000);
+}
+
+
+function renderClassContent(mod, cls, content) {
+  const c       = activeCourse;
+  const cacheKey = c.id+"-"+cls.id;
+  const isDone  = completedClasses.has(cacheKey);
+  const isAssign = cls.type==="assignment";
+
+  // Update chatbot context
+  updateChatContext(c.title, cls.title, content);
+
+  const topicsHtml = (cls.topics||[]).map(t=>`<span class="topic-tag">${t}</span>`).join("");
+
+  window._vidScript = "";
+  const videoHtml = !isAssign && cls.hasVideo ? buildVideoPlayer(cls, content) : "";
+
+  // Rich key points with bullets
+  // ── Rich Key Points HTML ──────────────────────────────────
+  const kpColors = ["var(--acc)","var(--cyan)","var(--green)","var(--amber)"];
+  const kpIcons  = ["◈","◉","◆","◇","◎","◐"];
+  const kpHtml = (content.keyPoints||[]).map((kp,i)=>{
+    const heading = typeof kp==="object" ? kp.heading : `Key Point ${i+1}`;
+    const body    = typeof kp==="object" ? (kp.body||"") : String(kp);
+    const bullets = typeof kp==="object" && Array.isArray(kp.bullets) ? kp.bullets : [];
+    const col     = kpColors[i%4];
+    const bullHtml = bullets.filter(b=>b&&b.trim()).map((b,bi)=>`
+      <div style="display:flex;align-items:flex-start;gap:.55rem;padding:.3rem 0;border-top:1px solid rgba(255,255,255,.04)">
+        <span style="width:20px;height:20px;border-radius:50%;background:${col};display:flex;align-items:center;justify-content:center;font-size:.65rem;font-weight:800;color:#fff;flex-shrink:0;margin-top:.05rem">${bi+1}</span>
+        <span style="font-size:.82rem;color:var(--fg);line-height:1.55;flex:1">${b}</span>
+      </div>`).join("");
+    return `
+    <div style="background:var(--sfc2);border:1px solid var(--border);border-radius:12px;overflow:hidden;margin-bottom:.75rem">
+      <div style="display:flex;align-items:center;gap:.65rem;padding:.75rem 1rem;background:rgba(255,255,255,.025);border-bottom:1px solid var(--border)">
+        <div style="width:28px;height:28px;border-radius:8px;background:${col};display:flex;align-items:center;justify-content:center;font-size:.78rem;font-weight:800;color:#fff;flex-shrink:0">${i+1}</div>
+        <span style="font-size:.92rem;font-weight:700;color:var(--fg);flex:1">${heading}</span>
+        <span style="font-size:.68rem;font-weight:600;color:${col};background:${col}22;padding:.18rem .55rem;border-radius:99px;border:1px solid ${col}44">Concept ${i+1}</span>
+      </div>
+      <div style="padding:.85rem 1rem">
+        <p style="font-size:.86rem;color:var(--soft);line-height:1.7;margin-bottom:${bullHtml?'.75rem':'0'}">${body}</p>
+        ${bullHtml ? `<div style="display:flex;flex-direction:column;gap:0">${bullHtml}</div>` : ""}
+      </div>
+    </div>`;
+  }).join("");
+
+  // ── Real world example ────────────────────────────────────
+  const rwHtml = content.realWorldExample ? `
+    <div style="background:linear-gradient(135deg,rgba(34,211,238,.06),rgba(110,86,255,.04));border:1px solid rgba(34,211,238,.2);border-radius:12px;padding:1rem 1.1rem;margin-bottom:1.1rem">
+      <div style="display:flex;align-items:center;gap:.5rem;font-size:.82rem;font-weight:700;color:var(--cyan);margin-bottom:.45rem">
+        <span style="width:22px;height:22px;background:rgba(34,211,238,.15);border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:.72rem">R</span>
+        Real-World Example
+      </div>
+      <p style="font-size:.84rem;color:var(--soft);line-height:1.65;margin:0">${content.realWorldExample}</p>
+    </div>` : "";
+
+  // ── Key stats pills ───────────────────────────────────────
+  const statsHtml = (content.keyStats||[]).filter(s=>s&&s.trim()).length ? `
+    <div style="margin-bottom:1rem">
+      <div style="font-size:.72rem;font-weight:700;color:var(--muted);letter-spacing:.05em;margin-bottom:.45rem;text-transform:uppercase">Key Stats</div>
+      <div style="display:flex;gap:.4rem;flex-wrap:wrap">
+        ${(content.keyStats||[]).filter(s=>s&&s.trim()).map(s=>`
+          <span style="padding:.28rem .82rem;border-radius:99px;font-size:.74rem;background:rgba(34,211,238,.07);border:1px solid rgba(34,211,238,.18);color:var(--cyan);line-height:1.5">${s}</span>
+        `).join("")}
+      </div>
+    </div>` : "";
+
+  // ── Assignment (MCQ) ─────────────────────────────────────
+  let assignHtml = "";
+  if (isAssign) {
+    assignHtml = `
+      <div class="assign-card" id="assign-card-${cacheKey}">
+        <div class="assign-hdr">
+          <h3>Module Assessment Quiz</h3>
+          <span class="assign-badge">MCQ Quiz</span>
+        </div>
+        <p class="assign-desc">Test your knowledge with an AI-generated 10-question quiz covering all topics in this module. You need 70% to pass and move on.</p>
+        <button class="btn-dl btn-ppt" id="load-mcq-btn" onclick="loadMCQ('${cacheKey}')">
+          Start MCQ Quiz
+        </button>
+        <div id="mcq-container-${cacheKey}" style="margin-top:1rem"></div>
+      </div>`;
+  }
+
+  // ── Next Steps ────────────────────────────────────────────
+  const nsItems = (content.nextSteps||[]).filter(s=>s&&s.trim());
+  const nsHtml = nsItems.length ? `
+    <div style="background:var(--sfc2);border:1px solid var(--border);border-radius:12px;padding:.9rem 1rem;margin-bottom:1.1rem">
+      <div style="font-size:.82rem;font-weight:700;color:var(--fg);margin-bottom:.65rem">Next Steps</div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:.45rem">
+        ${nsItems.slice(0,4).map((s,i)=>`
+          <div style="display:flex;align-items:flex-start;gap:.5rem;padding:.5rem .65rem;background:rgba(255,255,255,.03);border-radius:8px;border:1px solid var(--border)">
+            <span style="font-size:.72rem;font-weight:800;color:${kpColors[i%4]};background:${kpColors[i%4]}22;width:20px;height:20px;border-radius:5px;display:flex;align-items:center;justify-content:center;flex-shrink:0">0${i+1}</span>
+            <span style="font-size:.79rem;color:var(--soft);line-height:1.5">${s}</span>
+          </div>`).join("")}
+      </div>
+    </div>` : "";
+
+  // ── Next class button ────────────────────────────────────
+  const mods2 = activeCourse.modules;
+  const {moduleIdx, classIdx} = activeClass;
+  const hasNext = classIdx < mods2[moduleIdx].classes.length-1 || moduleIdx < mods2.length-1;
+  const nextBtn = hasNext ? `<button class="btn-dl btn-mark" onclick="nextClass()">Next Class</button>` : "";
+
+  document.getElementById("content-area").innerHTML = `
+    <div class="class-content">
+      <div class="class-content-hdr">
+        <h2>${cls.title}</h2>
+        <div class="class-badge-row">
+          <span class="cbadge ${isAssign?"cbadge-assign":"cbadge-video"}">${isAssign?"Quiz Assignment":"Video Class"}</span>
+          <span class="cbadge cbadge-dur">${cls.duration}</span>
+          <span class="cbadge cbadge-dur">${mod.title}</span>
+        </div>
+      </div>
+
+      ${videoHtml}
+
+      <div class="topics-row">${topicsHtml}</div>
+
+      ${statsHtml}
+
+      ${assignHtml}
+
+      ${rwHtml}
+
+      <div style="margin-bottom:1.1rem">
+        <div style="font-size:.88rem;font-weight:700;color:var(--fg);margin-bottom:.7rem;display:flex;align-items:center;gap:.5rem">
+          <span style="width:24px;height:24px;background:var(--acc);border-radius:7px;display:flex;align-items:center;justify-content:center;font-size:.7rem;font-weight:800;color:#fff">K</span>
+          Key Concepts
+        </div>
+        ${kpHtml}
+      </div>
+
+      ${nsHtml}
+
+      <div class="dl-actions">
+        ${cls.hasPPT?`<button class="btn-dl btn-ppt" onclick="dlPPTX()" id="dl-ppt-btn">Download PPT</button>`:""}
+        ${cls.hasNotes?`<button class="btn-dl btn-pdf" onclick="dlPDF()" id="dl-pdf-btn">Download PDF Notes</button>`:""}
+        <button class="btn-dl btn-mark" onclick="markDone('${cacheKey}')">${isDone?"Completed":"Mark as Done"}</button>
+        ${nextBtn}
+      </div>
+    </div>`;
+}
+
+function markDone(key) {
+  completedClasses.add(key);
+  updateProgress();
+  renderSidebar();
+  // Refresh button
+  const btn = document.querySelector(".dl-actions .btn-mark");
+  if (btn && btn.textContent.includes("Mark")) btn.textContent = " Completed";
+  toast(" Class marked as complete!");
+}
+
+function nextClass() {
+  let {moduleIdx, classIdx} = activeClass;
+  const mods = activeCourse.modules;
+  if (classIdx < mods[moduleIdx].classes.length-1) {
+    openClass(moduleIdx, classIdx+1);
+  } else if (moduleIdx < mods.length-1) {
+    // Open next module's first class
+    const nextMod = document.querySelectorAll(".module-header")[moduleIdx+1];
+    if (nextMod) { nextMod.classList.add("open"); nextMod.nextElementSibling.classList.add("open"); }
+    openClass(moduleIdx+1, 0);
+  }
+}
+
+/*  Download Full Course PPT  */
+async function dlFullCoursePPT() {
+  const c   = activeCourse;
+  if (!c) return;
+  const btn = document.getElementById('dl-course-ppt-btn');
+  if (btn) { btn.disabled=true; btn.innerHTML='<div style="width:14px;height:14px;border:2px solid rgba(255,255,255,.3);border-top-color:#fff;border-radius:50%;animation:spin .7s linear infinite"></div> Generating…'; }
+  toast(` Generating Full Course PPT for "${c.title}"…`, 15000);
+  try {
+    const {ok, b64, filename, error} = await call("/api/generate-course-pptx", {course: c});
+    if (!ok) throw new Error(error);
+    triggerDownload(b64, filename, "application/vnd.openxmlformats-officedocument.presentationml.presentation");
+    toast(` Full Course PPT downloaded!`, 4000);
+  } catch(e) {
+    toast(" " + e.message, 4000);
+  } finally {
+    if (btn) { btn.disabled=false; btn.innerHTML=' Download Full Course PPT'; }
+  }
+}
+
+/*  Download PPT  */
+/*  Download PPT — always load content first  */
+async function dlPPTX() {
+  const c    = activeCourse;
+  const cKey = c.id+"-"+activeClass.classId;
+  const mod  = c.modules[activeClass.moduleIdx];
+  const cls  = mod.classes[activeClass.classIdx];
+  const btn  = document.getElementById("dl-ppt-btn");
+  if (btn) { btn.disabled=true; btn.textContent="Generating…"; }
+  toast("Generating PPT slides…", 15000);
+
+  try {
+    // Always fetch content — generate if not cached
+    if (!classContent[cKey]) {
+      toast("Loading class content for PPT…", 12000);
+      const {ok, content} = await call("/api/generate-class-content", {
+        courseTitle: c.title, moduleTitle: mod.title,
+        classTitle: cls.title, topics: cls.topics||[], level: c.level||"Beginner",
+        lang: c.lang||"",
+      });
+      if (ok) classContent[cKey] = content;
+    }
+
+    const cont = classContent[cKey] || {};
+
+    const {ok,b64,filename,error} = await call("/api/generate-pptx", {
+      data: {
+        courseTitle: c.title,
+        moduleTitle: mod.title,
+        classTitle:  cls.title,
+        topics:      cls.topics || [],
+        duration:    cls.duration || "45 min",
+        level:       c.level || "Beginner",
+        color:       c.color || "#6C47FF",
+        keyPoints:   cont.keyPoints  || [],
+        objectives:  cont.objectives || [],
+        summary:     cont.summary    || "",
+        nextSteps:   cont.nextSteps  || [],
+        videoScript: cont.videoScript || "",
+        realWorldExample: cont.realWorldExample || "",
+        keyStats:    cont.keyStats   || [],
+        diagramData: cont.diagramData || {type:"flow"},
+      }
+    });
+    if (!ok) throw new Error(error);
+    triggerDownload(b64, filename, "application/vnd.openxmlformats-officedocument.presentationml.presentation");
+    toast("PPT downloaded!", 3000);
+  } catch(e) {
+    toast("PPT Error: " + e.message, 4000);
+  } finally {
+    if (btn) { btn.disabled=false; btn.textContent="Download PPT"; }
+  }
+}
+
+/*  Download PDF  */
+async function dlPDF() {
+  const c    = activeCourse;
+  const cKey = c.id+"-"+activeClass.classId;
+  const cont = classContent[cKey];
+  const mod  = c.modules[activeClass.moduleIdx];
+  const cls  = mod.classes[activeClass.classIdx];
+  const btn  = document.getElementById("dl-pdf-btn");
+  if (btn) { btn.disabled=true; btn.textContent="Generating…"; }
+  toast(" Generating PDF notes…", 9000);
+  try {
+    const {ok,b64,filename,error} = await call("/api/generate-pdf", {
+      courseTitle: c.title, moduleTitle: mod.title, classTitle: cls.title,
+      keyPoints:  cont?.keyPoints  || [],
+      objectives: cont?.objectives || [],
+    });
+    if (!ok) throw new Error(error);
+    triggerDownload(b64, filename, "application/pdf");
+    toast(` PDF notes downloaded!`, 3000);
+  } catch(e) {
+    toast(" " + e.message, 4000);
+  } finally {
+    if (btn) { btn.disabled=false; btn.textContent=" Download PDF Notes"; }
+  }
+}
+
+function triggerDownload(b64, filename, mime) {
+  const raw   = atob(b64);
+  const bytes = new Uint8Array(raw.length);
+  for (let i=0;i<raw.length;i++) bytes[i] = raw.charCodeAt(i);
+  const blob = new Blob([bytes], {type: mime});
+  const url  = URL.createObjectURL(blob);
+  const a    = document.createElement("a");
+  a.href=url; a.download=filename;
+  document.body.appendChild(a); a.click(); document.body.removeChild(a);
+  URL.revokeObjectURL(url);
+}
+
+/*  Toast  */
+function toast(msg, ms=3200) {
+  const el = document.getElementById("toast");
+  document.getElementById("t-msg").textContent = msg;
+  el.classList.add("show");
+  clearTimeout(el._t);
+  el._t = setTimeout(()=>el.classList.remove("show"), ms);
+}
+
+/* 
+   MCQ QUIZ
+    */
+let mcqState = {};
+
+async function loadMCQ(cacheKey) {
+  const btn = document.getElementById("load-mcq-btn");
+  if (btn) { btn.disabled=true; btn.textContent="Generating Quiz..."; }
+  const c   = activeCourse;
+  const mod = c.modules[activeClass.moduleIdx];
+  const cls = mod.classes[activeClass.classIdx];
+
+  // Send only key point headings (not full body text) to keep payload small
+  const allKP = [];
+  for (const cl of mod.classes) {
+    const key = c.id+"-"+cl.id;
+    if (classContent[key]) {
+      (classContent[key].keyPoints||[]).forEach(k => {
+        allKP.push(typeof k==="object" ? k.heading : String(k));
+      });
+    }
+  }
+
+  try {
+    toast("Generating your quiz... please wait", 20000);
+    const res = await fetch(API + "/api/generate-mcq", {
+      method: "POST",
+      headers: {"Content-Type":"application/json"},
+      body: JSON.stringify({
+        courseTitle: c.title,
+        moduleTitle: mod.title,
+        classTitle:  cls.title,
+        topics:      (cls.topics||[]).slice(0,4),
+        keyPoints:   allKP.slice(0,5),  // only headings, small payload
+      })
+    });
+    if (!res.ok) throw new Error("Server error: " + res.status);
+    const data = await res.json();
+    if (!data.ok) throw new Error(data.error || "Quiz generation failed");
+    mcqState[cacheKey] = { quiz: data.quiz, current: 0, answers: {}, submitted: {}, score: null };
+    renderMCQ(cacheKey);
+  } catch(e) {
+    if (btn) { btn.disabled=false; btn.textContent="Start MCQ Quiz"; }
+    toast("Could not load quiz: " + e.message, 5000);
+    // Show retry button inside container
+    const container = document.getElementById("mcq-container-"+cacheKey);
+    if (container) container.innerHTML = `
+      <div style="padding:1rem;text-align:center">
+        <p style="color:var(--soft);font-size:.85rem;margin-bottom:.75rem">Quiz failed to load. Check your internet connection and try again.</p>
+        <button class="btn-dl btn-ppt" onclick="loadMCQ('${cacheKey}')">Retry Quiz</button>
+      </div>`;
+  }
+}
+
+function renderMCQ(cacheKey) {
+  const container = document.getElementById("mcq-container-"+cacheKey);
+  if (!container) return;
+  const state = mcqState[cacheKey];
+  if (!state || !state.quiz) return;
+
+  if (state.score !== null) {
+    renderMCQResult(container, state, cacheKey);
+    return;
+  }
+
+  const quiz = state.quiz;
+  const qs   = quiz.questions || [];
+  if (qs.length === 0) {
+    container.innerHTML = `<div style="padding:1rem;text-align:center;color:var(--soft)">No questions available. Try retrying.</div>`;
+    return;
+  }
+
+  const q    = qs[state.current];
+  const n    = qs.length;
+  const pct  = (state.current / n * 100).toFixed(0);
+  const ans  = state.answers[state.current];
+  const sub  = state.submitted[state.current];
+  const diffCls = (q.difficulty||"medium").toLowerCase();
+  const isLast  = state.current === n - 1;
+
+  const optsHtml = (q.options||[]).map(opt => {
+    let cls = "";
+    if (ans === opt.id) {
+      cls = sub ? (opt.id===q.correct ? "correct" : "wrong") : "selected";
+    } else if (sub && opt.id===q.correct) cls = "correct";
+    return `<div class="mcq-opt ${cls}" onclick="selectMCQ('${cacheKey}',${state.current},'${opt.id}')">
+      <span class="mcq-opt-key">${opt.id}</span>
+      <span>${opt.text||""}</span>
+    </div>`;
+  }).join("");
+
+  // Build action buttons
+  let actionBtns = `<button class="mcq-nav-btn" onclick="mcqPrev('${cacheKey}')" ${state.current===0?"disabled":""}>Previous</button>
+    <span style="font-size:.78rem;color:var(--muted)">${Object.keys(state.answers).length} / ${n} answered</span>`;
+  if (!sub) {
+    actionBtns += `<button class="mcq-submit-btn" onclick="mcqSubmitOne('${cacheKey}')" ${ans?"":"disabled"}>Submit Answer</button>`;
+  } else if (!isLast) {
+    actionBtns += `<button class="mcq-submit-btn" onclick="mcqNext('${cacheKey}')">Next Question</button>`;
+  } else {
+    actionBtns += `<button class="mcq-submit-btn" onclick="mcqFinish('${cacheKey}')">Finish Quiz</button>`;
+  }
+
+  container.innerHTML = `
+    <div class="mcq-wrap">
+      <div class="mcq-header">
+        <div class="mcq-header-info">
+          <h3>${quiz.title||"Module Quiz"}</h3>
+          <p>${quiz.description||""}</p>
+        </div>
+        <div class="mcq-meta">
+          <span>${quiz.timeLimit||15} min</span>
+          <span>Pass: ${quiz.passingScore||70}%</span>
+        </div>
+      </div>
+      <div class="mcq-body">
+        <div class="mcq-progress-bar"><div class="mcq-progress-fill" style="width:${pct}%"></div></div>
+        <div class="mcq-question-num">Question ${state.current+1} of ${n}</div>
+        <div class="mcq-question-text">${q.question||""}</div>
+        <span class="mcq-diff ${diffCls}">${diffCls.toUpperCase()}</span>
+        <div class="mcq-options">${optsHtml}</div>
+        <div class="mcq-explanation ${sub?"show":""}">
+          <strong>Explanation:</strong> ${q.explanation||"Review your class notes for this concept."}
+        </div>
+        <div class="mcq-actions">${actionBtns}</div>
+      </div>
+    </div>`;
+}
+
+function selectMCQ(cacheKey, qIdx, optId) {
+  const state = mcqState[cacheKey];
+  if (!state || state.submitted[qIdx]) return;
+  state.answers[qIdx] = optId;
+  renderMCQ(cacheKey);
+}
+
+function mcqSubmitOne(cacheKey) {
+  const state = mcqState[cacheKey];
+  if (!state || !state.answers[state.current]) { toast("Please select an answer first"); return; }
+  state.submitted[state.current] = true;
+  renderMCQ(cacheKey);
+}
+
+function mcqNext(cacheKey) {
+  const state = mcqState[cacheKey];
+  if (!state) return;
+  state.current = Math.min(state.current+1, state.quiz.questions.length-1);
+  renderMCQ(cacheKey);
+}
+
+function mcqPrev(cacheKey) {
+  const state = mcqState[cacheKey];
+  if (!state) return;
+  state.current = Math.max(state.current-1, 0);
+  renderMCQ(cacheKey);
+}
+
+function mcqFinish(cacheKey) {
+  const state = mcqState[cacheKey];
+  if (!state) return;
+  const qs = state.quiz.questions;
+  let correct = 0;
+  qs.forEach((q,i)=>{ if (state.answers[i]===q.correct) correct++; });
+  state.score = Math.round(correct/qs.length*100);
+  state.correct = correct;
+  renderMCQ(cacheKey);
+  if (state.score >= (state.quiz.passingScore||70)) {
+    toast(` Passed! Score: ${state.score}%`, 4000);
+    markDone(cacheKey);
+  } else {
+    toast(` Score: ${state.score}%. Try again to improve!`, 4000);
+  }
+}
+
+function renderMCQResult(container, state, cacheKey) {
+  const pass = state.score >= (state.quiz.passingScore||70);
+  const color = pass ? "var(--green)" : state.score>=50?"var(--amber)":"var(--red)";
+  const msg   = pass ? "Excellent Work!" : state.score>=50 ? "Good Effort!" : "Keep Practicing!";
+  const sub   = pass ? "You passed this module assessment." : "Review the material and try again.";
+  const qs    = state.quiz.questions;
+  const wrong = qs.length - state.correct;
+
+  container.innerHTML = `
+    <div class="mcq-wrap">
+      <div class="mcq-result">
+        <div class="mcq-score-circle" style="border:5px solid ${color}">
+          <div class="mcq-score-num" style="color:${color}">${state.score}%</div>
+          <div class="mcq-score-pct">${pass?"PASSED":"FAILED"}</div>
+        </div>
+        <div class="mcq-result-msg">${msg}</div>
+        <div class="mcq-result-sub">${sub}</div>
+        <div class="mcq-result-grid">
+          <div class="mcq-stat-card"><div class="mcq-stat-val" style="color:var(--green)">${state.correct}</div><div class="mcq-stat-lbl">Correct</div></div>
+          <div class="mcq-stat-card"><div class="mcq-stat-val" style="color:var(--red)">${wrong}</div><div class="mcq-stat-lbl">Wrong</div></div>
+          <div class="mcq-stat-card"><div class="mcq-stat-val" style="color:${color}">${state.score}%</div><div class="mcq-stat-lbl">Score</div></div>
+        </div>
+        <button class="mcq-retry-btn" onclick="retryMCQ('${cacheKey}')">↺ Retry Quiz</button>
+        ${pass?`<button class="mcq-submit-btn" onclick="nextClass()">Next Class →</button>`:""}
+      </div>
+    </div>`;
+}
+
+function retryMCQ(cacheKey) {
+  const state = mcqState[cacheKey];
+  if (!state) return;
+  state.current = 0; state.answers = {}; state.submitted = {}; state.score = null; state.correct = 0;
+  renderMCQ(cacheKey);
+}
+
+/* 
+   CLAUDE CHATBOT
+    */
+let chatOpen = false;
+let chatMessages = [];
+let chatContext = { course: "", cls: "", content: "" };
+
+function updateChatContext(course, cls, content) {
+  chatContext.course = course||"";
+  chatContext.cls = cls||"";
+  chatContext.content = content ? (content.summary||"")+" "+(content.keyPoints||[]).slice(0,3).map(k=>typeof k==="object"?k.heading:k).join(", ") : "";
+  const label = document.getElementById("chat-context-label");
+  if (label && cls) label.textContent = `Studying: ${cls.slice(0,35)}`;
+}
+
+function toggleChat() {
+  chatOpen = !chatOpen;
+  document.getElementById("chat-panel").classList.toggle("open", chatOpen);
+  if (chatOpen) {
+    setTimeout(()=>{ const inp=document.getElementById("chat-input"); if(inp) inp.focus(); }, 300);
+  }
+}
+
+function chatSuggest(text) {
+  document.getElementById("chat-input").value = text;
+  sendChat();
+}
+
+async function sendChat() {
+  const inp  = document.getElementById("chat-input");
+  const btn  = document.getElementById("chat-send-btn");
+  const text = inp.value.trim();
+  if (!text) return;
+
+  inp.value = "";
+  inp.style.height = "auto";
+  btn.disabled = true;
+
+  // Show user message immediately
+  appendChatMsg("user", text);
+
+  // ── PPT REQUEST DETECTION ──────────────────────────
+  const pptKeywords = /\b(ppt|pptx|powerpoint|presentation|slides?|download ppt|give.*ppt|make.*ppt|create.*ppt|generate.*ppt|send.*ppt|full course ppt|class ppt)\b/i;
+  if (pptKeywords.test(text)) {
+    btn.disabled = false;
+    inp.focus();
+    await handleChatPPTRequest(text);
+    return;
+  }
+
+  // Show typing indicator
+  const typingId = "typing-" + Date.now();
+  appendChatTyping(typingId);
+
+  try {
+    const history = chatMessages.slice(-8);
+    const res = await fetch(API + "/api/chat", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        messages:       [...history, { role: "user", content: text }],
+        courseContext:  chatContext.course  || "",
+        classContext:   chatContext.cls     || "",
+        contentContext: chatContext.content || "",
+      })
+    });
+
+    removeEl(typingId);
+
+    if (!res.ok) {
+      const errData = await res.json().catch(() => ({}));
+      throw new Error(errData.error || "Server error " + res.status);
+    }
+
+    const data = await res.json();
+    if (!data.ok) throw new Error(data.error || "Chat failed");
+
+    chatMessages.push({ role: "user",      content: text       });
+    chatMessages.push({ role: "assistant", content: data.reply });
+    appendChatMsg("bot", data.reply);
+
+  } catch(e) {
+    removeEl(typingId);
+    const msg = e.message.includes("Failed to fetch") || e.message.includes("NetworkError")
+      ? "Backend not reachable. Make sure <b>python app.py</b> is running."
+      : "Error: " + e.message;
+    appendChatMsg("bot", msg);
+  } finally {
+    btn.disabled = false;
+    inp.focus();
+  }
+}
+
+// ── CHAT PPT REQUEST HANDLER ──────────────────────────
+async function handleChatPPTRequest(text) {
+  const c   = activeCourse;
+  const isClassPPT = /\b(this class|current class|class ppt|class slide|class presentation|this slide)\b/i.test(text);
+  const isFullPPT  = /\b(full course|entire course|whole course|complete course|all modules|course ppt)\b/i.test(text);
+
+  // Decide what to generate
+  let pptType = "class"; // default
+  if (isFullPPT) pptType = "full";
+  else if (!isClassPPT && !activeClass) pptType = "full";
+  else if (!activeClass && c) pptType = "full";
+
+  if (!c) {
+    appendChatMsg("bot", "Please open a course first, then I can generate the PPT for you.");
+    return;
+  }
+
+  // Show options message with download buttons
+  const msgId = "ppt-msg-" + Date.now();
+  const msgs  = document.getElementById("chat-messages");
+  const div   = document.createElement("div");
+  div.className = "chat-msg bot";
+  div.id = msgId;
+
+  const hasClass = activeClass !== null;
+  div.innerHTML = `
+    <div style="margin-bottom:.6rem">Sure! Which PPT would you like to download?</div>
+    <div style="display:flex;flex-direction:column;gap:.5rem">
+      ${hasClass ? `
+      <button onclick="chatDownloadClassPPT('${msgId}')" style="display:flex;align-items:center;gap:.5rem;padding:.55rem .9rem;border-radius:9px;background:linear-gradient(135deg,var(--acc),#9B74FF);color:#fff;border:none;cursor:pointer;font-size:.82rem;font-weight:700;text-align:left;transition:.2s" onmouseover="this.style.opacity='.85'" onmouseout="this.style.opacity='1'">
+        <span style="font-size:1rem">▶</span>
+        <div>
+          <div style="font-weight:700">Current Class PPT</div>
+          <div style="font-size:.72rem;opacity:.8">${activeClass ? activeCourse.modules[activeClass.moduleIdx].classes[activeClass.classIdx].title : ""}</div>
+        </div>
+      </button>` : ""}
+      <button onclick="chatDownloadFullCoursePPT('${msgId}')" style="display:flex;align-items:center;gap:.5rem;padding:.55rem .9rem;border-radius:9px;background:linear-gradient(135deg,#059669,#0EA5E9);color:#fff;border:none;cursor:pointer;font-size:.82rem;font-weight:700;text-align:left;transition:.2s" onmouseover="this.style.opacity='.85'" onmouseout="this.style.opacity='1'">
+        <span style="font-size:1rem">▶</span>
+        <div>
+          <div style="font-weight:700">Full Course PPT</div>
+          <div style="font-size:.72rem;opacity:.8">${c.title} — All ${(c.modules||[]).length} Modules</div>
+        </div>
+      </button>
+    </div>`;
+  msgs.appendChild(div);
+  msgs.scrollTop = msgs.scrollHeight;
+}
+
+async function chatDownloadClassPPT(msgId) {
+  const c    = activeCourse;
+  const mod  = c.modules[activeClass.moduleIdx];
+  const cls  = mod.classes[activeClass.classIdx];
+  const cKey = c.id+"-"+cls.id;
+
+  _chatPPTStatus(msgId, "Loading class content...");
+
+  // Always ensure content is loaded
+  if (!classContent[cKey]) {
+    try {
+      const {ok, content} = await call("/api/generate-class-content", {
+        courseTitle: c.title, moduleTitle: mod.title,
+        classTitle: cls.title, topics: cls.topics||[], level: c.level||"Beginner",
+        lang: c.lang||"",
+      });
+      if (ok) classContent[cKey] = content;
+    } catch(e) { /* use empty fallback */ }
+  }
+
+  const cont = classContent[cKey] || {};
+  _chatPPTStatus(msgId, "Generating class PPT... please wait");
+
+  try {
+    const {ok,b64,filename,error} = await call("/api/generate-pptx", {
+      data: {
+        courseTitle: c.title, moduleTitle: mod.title, classTitle: cls.title,
+        topics:      cls.topics || [],
+        duration:    cls.duration || "45 min",
+        level:       c.level || "Beginner",
+        color:       c.color || "#6C47FF",
+        keyPoints:   cont.keyPoints  || [],
+        objectives:  cont.objectives || [],
+        summary:     cont.summary    || "",
+        nextSteps:   cont.nextSteps  || [],
+        videoScript: cont.videoScript || "",
+        realWorldExample: cont.realWorldExample || "",
+        keyStats:    cont.keyStats   || [],
+        diagramData: cont.diagramData || {type:"flow"},
+      }
+    });
+    if (!ok) throw new Error(error);
+    triggerDownload(b64, filename, "application/vnd.openxmlformats-officedocument.presentationml.presentation");
+    _chatPPTStatus(msgId, `<span style="color:var(--green)">Class PPT downloaded! Check your downloads folder.</span>`);
+  } catch(e) {
+    _chatPPTStatus(msgId, `<span style="color:var(--red)">Failed: ${e.message}</span>`);
+  }
+}
+
+async function chatDownloadFullCoursePPT(msgId) {
+  const c = activeCourse;
+  _chatPPTStatus(msgId, "Generating full course PPT... this takes 10-20 seconds");
+
+  try {
+    const {ok,b64,filename,error} = await call("/api/generate-course-pptx", {course: c});
+    if (!ok) throw new Error(error);
+    triggerDownload(b64, filename, "application/vnd.openxmlformats-officedocument.presentationml.presentation");
+    _chatPPTStatus(msgId, `<span style="color:var(--green)">Full Course PPT downloaded! Check your downloads folder.</span>`);
+  } catch(e) {
+    _chatPPTStatus(msgId, `<span style="color:var(--red)">Failed: ${e.message}</span>`);
+  }
+}
+
+function _chatPPTStatus(msgId, html) {
+  const el = document.getElementById(msgId);
+  if (!el) return;
+  // Find or create status div
+  let status = el.querySelector(".ppt-status");
+  if (!status) {
+    status = document.createElement("div");
+    status.className = "ppt-status";
+    status.style.cssText = "margin-top:.55rem;font-size:.8rem;color:var(--soft);padding:.4rem .6rem;border-radius:7px;background:rgba(255,255,255,.04);border:1px solid var(--border)";
+    el.appendChild(status);
+  }
+  status.innerHTML = html;
+  document.getElementById("chat-messages").scrollTop = 99999;
+}
+
+function appendChatMsg(role, text) {
+  const msgs = document.getElementById("chat-messages");
+  const div  = document.createElement("div");
+  div.className = "chat-msg " + role;
+  // Simple markdown: code blocks, bold, line breaks
+  const html = text
+    .replace(/```([\s\S]*?)```/g, (_,c)=>`<pre><code>${c.replace(/</g,"&lt;")}</code></pre>`)
+    .replace(/`([^`]+)`/g, (_,c)=>`<code>${c}</code>`)
+    .replace(/\*\*(.+?)\*\*/g, "<strong>$1</strong>")
+    .replace(/\n/g, "<br>");
+  div.innerHTML = html;
+  msgs.appendChild(div);
+  msgs.scrollTop = msgs.scrollHeight;
+}
+
+function appendChatTyping(id) {
+  const msgs = document.getElementById("chat-messages");
+  const div  = document.createElement("div");
+  div.id = id;
+  div.className = "chat-msg bot";
+  div.innerHTML = `<div class="chat-typing"><span></span><span></span><span></span></div>`;
+  msgs.appendChild(div);
+  msgs.scrollTop = msgs.scrollHeight;
+}
+
+function removeEl(id) {
+  const el = document.getElementById(id);
+  if (el) el.remove();
+}
+
+/* ══════════════════════════════════════
+   VOICE AGENT
+   ══════════════════════════════════════ */
+const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+let searchListening = false, chatListening = false;
+let searchRec = null, chatRec = null;
+
+function makeRec(onResult, onEnd) {
+  if (!SpeechRecognition) return null;
+  const r = new SpeechRecognition();
+  r.continuous = false; r.interimResults = true; r.lang = "en-US";
+  r.onresult = (e) => {
+    const t = Array.from(e.results).map(x=>x[0].transcript).join("");
+    onResult(t, e.results[e.results.length-1].isFinal);
+  };
+  r.onerror = (e) => {
+    if (e.error==="not-allowed") toast("Microphone blocked. Allow it in browser settings.",4000);
+    else if (e.error!=="aborted") toast("Voice error: "+e.error,3000);
+    onEnd();
+  };
+  r.onend = onEnd;
+  return r;
+}
+
+function micIcon() {
+  return `<svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" style="width:16px;height:16px;pointer-events:none"><rect x="9" y="2" width="6" height="11" rx="3"/><path d="M5 10a7 7 0 0 0 14 0M12 19v3M9 22h6"/></svg>`;
+}
+
+// ── SEARCH VOICE ─────────────────────────────────────
+function toggleSearchVoice() {
+  if (!SpeechRecognition) { toast("Voice needs Chrome browser.",3500); return; }
+  if (searchListening) { stopSearchVoice(); return; }
+  const btn=document.getElementById("search-voice-btn");
+  const status=document.getElementById("search-voice-status");
+  const stxt=document.getElementById("search-voice-text");
+  const inp=document.getElementById("skill-inp");
+  searchRec = makeRec(
+    (txt,final) => {
+      inp.value=txt;
+      stxt.textContent = final ? `Got it: "${txt}"` : `Hearing: "${txt}"`;
+      if (final) setTimeout(()=>stopSearchVoice(true), 350);
+    },
+    () => stopSearchVoice()
+  );
+  try {
+    searchRec.start(); searchListening=true;
+    btn.classList.add("listening"); btn.innerHTML=`<div class="voice-ring"></div>${micIcon()}`;
+    status.classList.add("show"); stxt.textContent="Listening… say your skill";
+    inp.placeholder="Listening…";
+  } catch(e){ toast("Mic error: "+e.message,3000); }
+}
+function stopSearchVoice(autoGen) {
+  searchListening=false;
+  if (searchRec){try{searchRec.stop();}catch(e){} searchRec=null;}
+  const btn=document.getElementById("search-voice-btn");
+  const status=document.getElementById("search-voice-status");
+  const inp=document.getElementById("skill-inp");
+  if(btn){btn.classList.remove("listening");btn.innerHTML=micIcon();}
+  if(status) status.classList.remove("show");
+  if(inp) inp.placeholder="Search any skill…";
+  if(autoGen && inp && inp.value.trim()) setTimeout(()=>genCourse(),300);
+}
+
+// ── CHAT VOICE ───────────────────────────────────────
+function toggleChatVoice() {
+  if (!SpeechRecognition) { toast("Voice needs Chrome browser.",3500); return; }
+  if (chatListening) { stopChatVoice(); return; }
+  const btn=document.getElementById("chat-voice-btn");
+  const inp=document.getElementById("chat-input");
+  chatRec = makeRec(
+    (txt,final) => {
+      inp.value=txt; inp.style.height="auto";
+      inp.style.height=Math.min(inp.scrollHeight,120)+"px";
+      if (final) setTimeout(()=>{ stopChatVoice(); sendChat(); },300);
+    },
+    () => stopChatVoice()
+  );
+  try {
+    chatRec.start(); chatListening=true;
+    if(btn){btn.classList.add("listening");btn.innerHTML=micIcon();}
+    inp.placeholder="Listening…";
+    toast("Listening… speak your question",5000);
+  } catch(e){ toast("Mic error: "+e.message,3000); }
+}
+function stopChatVoice() {
+  chatListening=false;
+  if(chatRec){try{chatRec.stop();}catch(e){} chatRec=null;}
+  const btn=document.getElementById("chat-voice-btn");
+  const inp=document.getElementById("chat-input");
+  if(btn){btn.classList.remove("listening");btn.innerHTML=micIcon();}
+  if(inp) inp.placeholder="Ask anything...";
+}
+
+/*  Boot  */
+checkHealth();
+renderHomeGrid();
+</script>
+</body>
+</html>
